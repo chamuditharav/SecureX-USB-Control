@@ -1,6 +1,10 @@
 import time
+from tkinter import * 
+from tkinter import messagebox
+
 import win32com.client
 import subprocess
+from threading import Thread
 
 
 whitelisted_usb = ["USB Root Hub (USB 3.0)", "USB Composite Device", "USB xHCI Compliant Host Controller","Generic USB Hub"]
@@ -10,6 +14,21 @@ whitelisted_usb = ["USB Root Hub (USB 3.0)", "USB Composite Device", "USB xHCI C
 usb_devices = {}
 usb_device_status = {}
 usb_device_list = []
+
+
+
+def disableUSB(device):
+    print(f"Disabling {device} ......")
+    print(usb_devices)
+    return 0
+
+
+def disableUSB_daemon():
+    for device in usb_device_list:
+        pass
+        #print(usb_devices[device])
+    return 0
+
 
 def get_usb_device():
     usb_devices.clear()
@@ -21,12 +40,15 @@ def get_usb_device():
             if(usb.description.strip() not in whitelisted_usb):
                 hid = str(usb.DeviceID)
                 hid = hid.split("\\")
-                usb_devices[usb.description] = hid[0] + "\\" + hid[1]
-                usb_device_status[usb.description] = usb.Status
-                usb_device_list.append(usb.description)
+                dev_description = f"{usb.description}:{len(usb_devices)+1}"
+                usb_devices[dev_description] = hid[0] + "\\" + hid[1]
+                usb_device_status[dev_description] = usb.Status
+                usb_device_list.append(dev_description)
           
     except Exception as error:
         print('error', error)
+    
+    return 0
     
 
 
@@ -39,38 +61,52 @@ def remove_whitelist(whitelist,array):
             pass
     return array
 
-def main():
+       
+
+
+def usbWatchdog_service():
     usb_device_list_old = []
     new_devices = []
 
+    disableUSB_Thread = Thread(target=disableUSB_daemon, args=())
+    disableUSB_Thread.start()
+
     while True:
+
+        subprocess.run(['lib/devcon', 'hwids', '=usb'], capture_output=True, text=True)
         get_usb_device()
 
-        if(len(usb_device_list_old)==0):
-            usb_device_list_old = usb_device_list.copy()
+        # if(len(usb_device_list_old)==0):
+        #     usb_device_list_old = usb_device_list.copy()
 
-        elif(set(usb_device_list_old) != set(usb_device_list)):
+        if(set(usb_device_list) != set(usb_device_list_old)):
             new_devices = (list(set(usb_device_list).difference(set(usb_device_list_old))))
-            usb_device_list_old = usb_device_list.copy()
+
 
             if(len(new_devices) > 0):
                 for dev in new_devices:
                     print(f"{dev} -> {usb_device_status[dev]}")
+
+                    disableUSB(dev)
+
+            usb_device_list_old = usb_device_list.copy()
         else:
             usb_device_list_old = usb_device_list.copy()
 
-        print(usb_device_list)
-        print(usb_devices)
-        time.sleep(1)
+        #print(usb_device_list)
+        #print(usb_devices)
+        #time.sleep(1)
+
+        try:
+            if( not (disableUSB_Thread.is_alive())):
+                disableUSB_Thread = Thread(target=disableUSB_daemon, args=())
+                disableUSB_Thread.start()
+                disableUSB_Thread.join()         
+        except:
+            break
+        
+        time.sleep(2)
+
 
 if __name__ == "__main__":
-    main()
-    
-    #get_usb_device()
-    #x = remove_whitelist(whitelisted_usb,usb_device_list)
-    #print(x)
-
-    # for el in usb_device_list:
-    #     print(el in whitelisted_usb)
-   
-    #print("USB Root Hub (USB 3.0)" in whitelisted_usb)
+    usbWatchdog_service()

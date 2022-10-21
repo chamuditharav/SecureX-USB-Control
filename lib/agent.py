@@ -1,7 +1,12 @@
 import time
-import ctypes
+#import ctypes
+
+from ctypes import windll
 import os
 from datetime import datetime
+
+from lib import agent, genDevcon
+from hashlib import sha256
 
 
 import win32com.client
@@ -22,7 +27,7 @@ usb_device_list = []
 def showAlert(title,text):
     #alert(text=text, title=title, button='OK')
     pushLog(f"Alert : {title}")
-    MessageBox = ctypes.windll.user32.MessageBoxW
+    MessageBox = windll.user32.MessageBoxW
     MessageBox(None, text, title, 0)
 
 def pprint(context):
@@ -45,6 +50,39 @@ def pushLog(logInfo):
 
 
 
+def devconIntegrity(path):
+    pushLog("Checking devcon integrity")
+    if(not (os.path.exists(f"{path}.exe"))):
+        pushLog("No devcon detected!!!!!!")
+        devconMake = open(f"{path}.exe",'wb')
+        pushLog("Generating a new devcon........")
+        devconMake.write(bytes.fromhex(genDevcon.devcon_bkp))
+        devconMake.close()
+        pushLog("Devcon generated.........")
+    
+    else:
+        devconFile = open(f"{path}.exe",'rb')
+        content = devconFile.read()
+        devconFile.close()
+
+        if(not(sha256(content).hexdigest()) == genDevcon.devconHash):
+            pushLog("Devcon hash mis-match")
+            pushLog("Removing altered devcon")
+
+            os.remove(f"{path}.exe")
+            pushLog("Altered devcon removed")
+            devconMake = open(f"lib/devcon.exe",'wb')
+            pushLog("Generating a new devcon........")
+
+            devconMake.write(bytes.fromhex(genDevcon.devcon_bkp))
+            devconMake.close()
+            pushLog("Devcon generated.........")
+        
+        else:
+            pushLog("Devcon is valid")
+
+
+
 def disableUSB(devcon,device):
     pprint(f"Disabling {device} ......")
     try:
@@ -52,7 +90,8 @@ def disableUSB(devcon,device):
 
             pprint(usb_devices[device])
             pushLog(f"Inside device remove thread : {device}")
-            proc = subprocess.run([devcon, 'remove', usb_devices[device]],capture_output=True)
+            devconIntegrity(devcon)
+            proc = subprocess.run([devcon, 'remove', usb_devices[device]], shell=False, capture_output=True)
             out = proc.stdout.decode().strip()
             pushLog(f"devcon output : {device} : {out}")
             if(out):
@@ -109,18 +148,18 @@ def remove_whitelist(whitelist,array):
        
 
 
-def usbWatchdog_service(devcon):
+def usbWatchdog_service(devcon,limit):
     usb_device_list_old = []
     new_devices = []
 
     pushLog(f"Starting the device remove daemon.......")
-    disableUSB_Thread = Thread(target=disableUSB_daemon, args=(), daemon=True)
-    disableUSB_Thread.start()
+    
+    #disableUSB_Thread = Thread(target=disableUSB_daemon, args=(), daemon=True)
+    #disableUSB_Thread.start()
 
     pushLog("Agent start")
 
     while True:
-
         #subprocess.run([devcon, 'hwids', '=usb'], capture_output=True, text=True)
         get_usb_device()
 
@@ -153,17 +192,20 @@ def usbWatchdog_service(devcon):
         #pprint(usb_devices)
         #time.sleep(1)
 
+        '''
         try:
             if( not (disableUSB_Thread.is_alive())):
                 #pushLog(f"Starting the device remove daemon.......")
-                disableUSB_Thread = Thread(target=disableUSB_daemon, args=(), daemon=True)
+                print("sad")
+                disableUSB_Thread = Thread(target=disableUSB_daemon, args=())
                 disableUSB_Thread.start()
                 disableUSB_Thread.join()      
-                #pushLog(f"Daemon crashed or stopped")   
+                pushLog(f"Daemon crashed or stopped")
         except:
-            break
+            pass
+        '''
         
-        #time.sleep(0.2)
+        time.sleep(limit)
 
 
 if __name__ == "__main__":

@@ -42,10 +42,13 @@ for usb in wmi.InstancesOf ("Win32_USBHub"):
 #USB\VID_0718&PID_0638
 
 # proc = subprocess.run(["devcon", 'remove', "USB\\VID_0718&PID_0638"]) #USB\VID_0EA0&PID_2168
-proc = subprocess.run(["devcon", 'remove', "USB\\VID_0718&PID_0638"], capture_output=True) #USB\VID_0EA0&PID_2168
+#proc = subprocess.run(["devcon", 'remove', "USB\\VID_0718&PID_0638"], stderr=subprocess.PIPE, stdout=subprocess.PIPE) #USB\VID_0EA0&PID_2168
+
+proc = proc = subprocess.run(["devcon", 'remove', "USB\\VID_0718&PID_0638"], shell=False, capture_output=True)
+
 out = proc.stdout.decode().strip()
 
-print(out)
+print(proc)
 print("1 device(s) were removed" in out)
 
 #os.killpg(os.getpgid(proc.pid), signal.SIGTERM)

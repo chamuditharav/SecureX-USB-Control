@@ -183,3 +183,492 @@ No devices were removed.
 1 device(s) were removed.
 21/10/2022 22:06:55	 Alert : Alert
 21/10/2022 22:06:55	 Device remove thread ended for USB Mass Storage Device:1
+21/10/2022 22:25:18	 Starting the device remove daemon.......
+21/10/2022 22:25:18	 Agent start
+21/10/2022 22:25:26	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+21/10/2022 22:25:26	 Device remove thread start for USB Mass Storage Device:1
+21/10/2022 22:25:26	 Inside device remove thread : USB Mass Storage Device:1
+21/10/2022 22:25:26	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Remove failed
+No devices were removed.
+21/10/2022 22:25:26	 Alert : Alert
+21/10/2022 22:25:26	 Device remove thread ended for USB Mass Storage Device:1
+21/10/2022 22:25:33	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+21/10/2022 22:25:33	 Device remove thread start for USB Mass Storage Device:1
+21/10/2022 22:25:33	 Inside device remove thread : USB Mass Storage Device:1
+21/10/2022 22:25:33	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Remove failed
+No devices were removed.
+21/10/2022 22:25:33	 Alert : Alert
+21/10/2022 22:25:33	 Device remove thread ended for USB Mass Storage Device:1
+21/10/2022 22:26:36	 Starting the device remove daemon.......
+21/10/2022 22:26:36	 Agent start
+21/10/2022 22:26:40	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+21/10/2022 22:26:40	 Device remove thread start for USB Mass Storage Device:1
+21/10/2022 22:26:40	 Inside device remove thread : USB Mass Storage Device:1
+21/10/2022 22:26:42	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+21/10/2022 22:26:42	 Alert : Alert
+21/10/2022 22:26:42	 Device remove thread ended for USB Mass Storage Device:1
+21/10/2022 23:30:20	 Starting the device remove daemon.......
+21/10/2022 23:30:20	 Agent start
+21/10/2022 23:30:28	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+21/10/2022 23:30:28	 Device remove thread start for USB Mass Storage Device:1
+21/10/2022 23:30:28	 Inside device remove thread : USB Mass Storage Device:1
+21/10/2022 23:30:30	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+21/10/2022 23:30:30	 Alert : Alert
+21/10/2022 23:30:30	 Device remove thread ended for USB Mass Storage Device:1
+21/10/2022 23:30:55	 Starting the device remove daemon.......
+21/10/2022 23:30:55	 Agent start
+21/10/2022 23:30:58	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+21/10/2022 23:30:58	 Device remove thread start for USB Mass Storage Device:1
+21/10/2022 23:30:58	 Inside device remove thread : USB Mass Storage Device:1
+21/10/2022 23:31:00	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+21/10/2022 23:31:00	 Alert : Alert
+21/10/2022 23:31:00	 Device remove thread ended for USB Mass Storage Device:1
+21/10/2022 23:33:16	 Starting the device remove daemon.......
+21/10/2022 23:33:16	 Agent start
+21/10/2022 23:33:49	 Starting the device remove daemon.......
+21/10/2022 23:33:49	 Agent start
+21/10/2022 23:34:13	 Starting the device remove daemon.......
+21/10/2022 23:34:13	 Agent start
+21/10/2022 23:34:13	 Starting the device remove daemon.......
+21/10/2022 23:34:13	 Agent start
+21/10/2022 23:34:34	 Starting the device remove daemon.......
+21/10/2022 23:34:34	 Agent start
+21/10/2022 23:34:38	 Starting the device remove daemon.......
+21/10/2022 23:34:38	 Agent start
+21/10/2022 23:34:45	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+21/10/2022 23:34:45	 Device remove thread start for USB Mass Storage Device:1
+21/10/2022 23:34:45	 Inside device remove thread : USB Mass Storage Device:1
+21/10/2022 23:34:47	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+21/10/2022 23:34:47	 Alert : Alert
+21/10/2022 23:34:47	 Device remove thread ended for USB Mass Storage Device:1
+21/10/2022 23:35:45	 Starting the device remove daemon.......
+21/10/2022 23:35:45	 Agent start
+21/10/2022 23:35:48	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+21/10/2022 23:35:48	 Device remove thread start for USB Mass Storage Device:1
+21/10/2022 23:35:48	 Inside device remove thread : USB Mass Storage Device:1
+21/10/2022 23:35:50	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+21/10/2022 23:35:50	 Alert : Alert
+21/10/2022 23:35:50	 Device remove thread ended for USB Mass Storage Device:1
+21/10/2022 23:35:57	 Program exec error
+21/10/2022 23:50:29	 Starting the device remove daemon.......
+21/10/2022 23:50:29	 Agent start
+21/10/2022 23:50:39	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+21/10/2022 23:50:39	 Device remove thread start for USB Mass Storage Device:1
+21/10/2022 23:50:39	 Inside device remove thread : USB Mass Storage Device:1
+21/10/2022 23:50:39	 Device remove thread ended for USB Mass Storage Device:1
+21/10/2022 23:50:59	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+21/10/2022 23:50:59	 Device remove thread start for USB Mass Storage Device:1
+21/10/2022 23:50:59	 Inside device remove thread : USB Mass Storage Device:1
+21/10/2022 23:50:59	 Device remove thread ended for USB Mass Storage Device:1
+21/10/2022 23:51:25	 Program exec error
+21/10/2022 23:51:27	 Starting the device remove daemon.......
+21/10/2022 23:51:27	 Agent start
+21/10/2022 23:51:29	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+21/10/2022 23:51:29	 Device remove thread start for USB Mass Storage Device:1
+21/10/2022 23:51:29	 Inside device remove thread : USB Mass Storage Device:1
+21/10/2022 23:51:29	 Device remove thread ended for USB Mass Storage Device:1
+21/10/2022 23:51:36	 Starting the device remove daemon.......
+21/10/2022 23:51:36	 Agent start
+21/10/2022 23:51:37	 Program exec error
+21/10/2022 23:51:51	 Starting the device remove daemon.......
+21/10/2022 23:51:51	 Agent start
+21/10/2022 23:51:53	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+21/10/2022 23:51:53	 Device remove thread start for USB Mass Storage Device:1
+21/10/2022 23:51:53	 Inside device remove thread : USB Mass Storage Device:1
+21/10/2022 23:51:54	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+21/10/2022 23:51:54	 Alert : Alert
+21/10/2022 23:51:54	 Device remove thread ended for USB Mass Storage Device:1
+21/10/2022 23:55:44	 Program exec error
+21/10/2022 23:55:45	 Starting the device remove daemon.......
+21/10/2022 23:55:45	 Agent start
+21/10/2022 23:55:47	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+21/10/2022 23:55:47	 Device remove thread start for USB Mass Storage Device:1
+21/10/2022 23:55:47	 Inside device remove thread : USB Mass Storage Device:1
+21/10/2022 23:55:47	 Checking devcon integrity
+21/10/2022 23:55:47	 Devcon is valid
+21/10/2022 23:55:49	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+21/10/2022 23:55:49	 Alert : Alert
+21/10/2022 23:55:49	 Device remove thread ended for USB Mass Storage Device:1
+21/10/2022 23:55:53	 Program exec error
+22/10/2022 00:46:36	 Agent start
+22/10/2022 00:46:36	 Agent start
+22/10/2022 00:46:48	 Agent start
+22/10/2022 00:46:49	 Program exec error
+22/10/2022 00:47:57	 Agent start
+22/10/2022 00:48:09	 Program exec error
+22/10/2022 00:48:11	 Starting the device remove daemon.......
+22/10/2022 00:48:11	 Agent start
+22/10/2022 00:48:11	 Starting the device remove daemon.......
+22/10/2022 00:48:11	 Agent start
+22/10/2022 00:48:42	 Starting the device remove daemon.......
+22/10/2022 00:48:42	 Agent start
+22/10/2022 00:48:42	 Starting the device remove daemon.......
+22/10/2022 00:48:42	 Agent start
+22/10/2022 00:48:55	 Starting the device remove daemon.......
+22/10/2022 00:48:55	 Agent start
+22/10/2022 00:48:55	 Starting the device remove daemon.......
+22/10/2022 00:48:55	 Agent start
+22/10/2022 00:49:08	 Starting the device remove daemon.......
+22/10/2022 00:49:08	 Agent start
+22/10/2022 00:49:08	 Starting the device remove daemon.......
+22/10/2022 00:49:08	 Agent start
+22/10/2022 00:49:21	 Starting the device remove daemon.......
+22/10/2022 00:49:21	 Agent start
+22/10/2022 00:49:21	 Starting the device remove daemon.......
+22/10/2022 00:49:21	 Agent start
+22/10/2022 00:49:28	 Starting the device remove daemon.......
+22/10/2022 00:49:28	 Agent start
+22/10/2022 00:49:28	 Starting the device remove daemon.......
+22/10/2022 00:49:28	 Agent start
+22/10/2022 00:49:49	 Starting the device remove daemon.......
+22/10/2022 00:49:49	 Agent start
+22/10/2022 00:49:54	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 00:49:54	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 00:49:54	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 00:49:54	 Checking devcon integrity
+22/10/2022 00:49:54	 Devcon is valid
+22/10/2022 00:49:54	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 00:49:54	 Alert : Alert
+22/10/2022 00:49:54	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 00:50:58	 Program exec error
+22/10/2022 00:50:59	 Starting the device remove daemon.......
+22/10/2022 00:50:59	 Agent start
+22/10/2022 00:51:05	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 00:51:05	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 00:51:05	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 00:51:05	 Checking devcon integrity
+22/10/2022 00:51:05	 Devcon is valid
+22/10/2022 00:51:05	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 00:51:05	 Alert : Alert
+22/10/2022 00:51:05	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 00:51:09	 Program exec error
+22/10/2022 00:51:21	 Starting the device remove daemon.......
+22/10/2022 00:51:21	 Agent start
+22/10/2022 00:51:22	 Program exec error
+22/10/2022 00:51:25	 Starting the device remove daemon.......
+22/10/2022 00:51:25	 Agent start
+22/10/2022 00:51:30	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 00:51:30	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 00:51:30	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 00:51:30	 Checking devcon integrity
+22/10/2022 00:51:30	 Devcon is valid
+22/10/2022 00:51:30	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 00:51:30	 Alert : Alert
+22/10/2022 00:51:30	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 00:51:35	 Program exec error
+22/10/2022 01:03:01	 Starting the device remove daemon.......
+22/10/2022 01:03:01	 Agent start
+22/10/2022 01:03:09	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:03:09	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:03:09	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:03:09	 Checking devcon integrity
+22/10/2022 01:03:09	 Devcon is valid
+22/10/2022 01:03:11	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 01:03:11	 Alert : Alert
+22/10/2022 01:03:11	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:03:20	 Program exec error
+22/10/2022 01:03:23	 Starting the device remove daemon.......
+22/10/2022 01:03:23	 Agent start
+22/10/2022 01:03:32	 Program exec error
+22/10/2022 01:03:41	 Starting the device remove daemon.......
+22/10/2022 01:03:41	 Agent start
+22/10/2022 01:03:56	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:03:56	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:03:56	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:03:56	 Checking devcon integrity
+22/10/2022 01:03:56	 Devcon is valid
+22/10/2022 01:03:56	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed on reboot
+The 1 device(s) are ready to be removed. To remove the devices, reboot the system.
+22/10/2022 01:03:56	 Alert : Alert
+22/10/2022 01:03:56	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:04:14	 Program exec error
+22/10/2022 01:04:22	 Starting the device remove daemon.......
+22/10/2022 01:04:22	 Agent start
+22/10/2022 01:04:27	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:04:27	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:04:27	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:04:27	 Checking devcon integrity
+22/10/2022 01:04:27	 Devcon is valid
+22/10/2022 01:04:27	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 01:04:27	 Alert : Alert
+22/10/2022 01:04:27	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:04:35	 Program exec error
+22/10/2022 01:05:16	 Starting the device remove daemon.......
+22/10/2022 01:05:16	 Agent start
+22/10/2022 01:05:16	 Starting the device remove daemon.......
+22/10/2022 01:05:16	 Agent start
+22/10/2022 01:05:36	 Starting the device remove daemon.......
+22/10/2022 01:05:36	 Agent start
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:36	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:37	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Daemon crashed or stopped
+22/10/2022 01:05:38	 Program exec error
+22/10/2022 01:06:02	 Starting the device remove daemon.......
+22/10/2022 01:06:02	 Agent start
+22/10/2022 01:06:05	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:06:05	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:06:05	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:06:05	 Checking devcon integrity
+22/10/2022 01:06:05	 Devcon is valid
+22/10/2022 01:06:07	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 01:06:07	 Alert : Alert
+22/10/2022 01:06:07	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:06:11	 Program exec error
+22/10/2022 01:11:06	 Starting the device remove daemon.......
+22/10/2022 01:11:06	 Agent start
+22/10/2022 01:11:09	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:11:09	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:11:09	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:11:09	 Checking devcon integrity
+22/10/2022 01:11:09	 Devcon is valid
+22/10/2022 01:11:11	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 01:11:11	 Alert : Alert
+22/10/2022 01:11:11	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:11:28	 Program exec error

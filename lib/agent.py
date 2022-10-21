@@ -1,10 +1,16 @@
 import time
-from tkinter import * 
-from tkinter import messagebox
+import ctypes
+from pymsgbox import *
+import os
+
+# import tkinter as tk
+# from tkinter import * 
+# from tkinter import messagebox
 
 import win32com.client
 import subprocess
 from threading import Thread
+
 
 
 whitelisted_usb = ["USB Root Hub (USB 3.0)", "USB Composite Device", "USB xHCI Compliant Host Controller","Generic USB Hub"]
@@ -16,10 +22,30 @@ usb_device_status = {}
 usb_device_list = []
 
 
+def showAlert(title,text):
+    #alert(text=text, title=title, button='OK')
 
-def disableUSB(device):
+    MessageBox = ctypes.windll.user32.MessageBoxW
+    MessageBox(None, text, title, 0)
+
+
+def disableUSB(devcon,device):
     print(f"Disabling {device} ......")
-    print(usb_devices)
+    try:
+        if(usb_device_status[device] == "OK"):
+
+            print(usb_devices[device])
+
+            subprocess.run([devcon, 'remove', usb_devices[device]])
+            #subprocess.run([devcon, 'disable', usb_devices[device]])
+            msgBox_Thread = Thread(target=showAlert, args=('Alert', 'You are not allowed to use the plugged USB device'))
+            msgBox_Thread.start()
+            
+
+        else:
+            print("Already disabled or Device error!")
+    except:
+        pass
     return 0
 
 
@@ -64,7 +90,7 @@ def remove_whitelist(whitelist,array):
        
 
 
-def usbWatchdog_service():
+def usbWatchdog_service(devcon):
     usb_device_list_old = []
     new_devices = []
 
@@ -73,7 +99,7 @@ def usbWatchdog_service():
 
     while True:
 
-        subprocess.run(['lib/devcon', 'hwids', '=usb'], capture_output=True, text=True)
+        #subprocess.run([devcon, 'hwids', '=usb'], capture_output=True, text=True)
         get_usb_device()
 
         # if(len(usb_device_list_old)==0):
@@ -87,7 +113,11 @@ def usbWatchdog_service():
                 for dev in new_devices:
                     print(f"{dev} -> {usb_device_status[dev]}")
 
-                    disableUSB(dev)
+                    disable_USB_Device_Thread = Thread(target=disableUSB, args=(devcon,dev))
+                    disable_USB_Device_Thread.start()
+                    disable_USB_Device_Thread.join()
+                    
+                    #disableUSB(dev)
 
             usb_device_list_old = usb_device_list.copy()
         else:
@@ -105,8 +135,10 @@ def usbWatchdog_service():
         except:
             break
         
-        time.sleep(2)
+        #time.sleep(0.2)
 
 
 if __name__ == "__main__":
-    usbWatchdog_service()
+    pass
+    #print(os.getcwd())
+    #usbWatchdog_service(f"{os.getcwd()}\devcon")

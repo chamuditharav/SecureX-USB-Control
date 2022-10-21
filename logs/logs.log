@@ -672,3 +672,202 @@ The 1 device(s) are ready to be removed. To remove the devices, reboot the syste
 22/10/2022 01:11:11	 Alert : Alert
 22/10/2022 01:11:11	 Device remove thread ended for USB Mass Storage Device:1
 22/10/2022 01:11:28	 Program exec error
+22/10/2022 01:29:56	 Starting the device remove daemon.......
+22/10/2022 01:29:56	 Agent start
+22/10/2022 01:30:03	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:30:03	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:30:03	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:30:03	 Checking devcon integrity
+22/10/2022 01:30:03	 Devcon is valid
+22/10/2022 01:30:05	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:32:23	 Program exec error
+22/10/2022 01:32:28	 Starting the device remove daemon.......
+22/10/2022 01:32:28	 Agent start
+22/10/2022 01:32:35	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:32:35	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:32:35	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:32:35	 Checking devcon integrity
+22/10/2022 01:32:35	 Devcon is valid
+22/10/2022 01:32:36	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:33:19	 Program exec error
+22/10/2022 01:33:20	 Starting the device remove daemon.......
+22/10/2022 01:33:20	 Agent start
+22/10/2022 01:33:29	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:33:29	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:33:29	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:33:29	 Checking devcon integrity
+22/10/2022 01:33:29	 Devcon is valid
+22/10/2022 01:33:29	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:36:46	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:36:46	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:36:46	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:36:46	 Checking devcon integrity
+22/10/2022 01:36:46	 Devcon is valid
+22/10/2022 01:36:46	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:37:03	 Program exec error
+22/10/2022 01:38:14	 Starting the device remove daemon.......
+22/10/2022 01:38:14	 Agent start
+22/10/2022 01:38:14	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:38:14	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:38:14	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:38:14	 Checking devcon integrity
+22/10/2022 01:38:14	 Devcon is valid
+22/10/2022 01:38:14	 devcon output : USB Mass Storage Device:1 : No devices were removed.
+22/10/2022 01:38:14	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:38:27	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:38:27	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:38:27	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:38:27	 Checking devcon integrity
+22/10/2022 01:38:27	 Devcon is valid
+22/10/2022 01:38:27	 devcon output : USB Mass Storage Device:1 : No devices were removed.
+22/10/2022 01:38:27	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:38:33	 Program exec error
+22/10/2022 01:38:47	 Starting the device remove daemon.......
+22/10/2022 01:38:47	 Agent start
+22/10/2022 01:38:47	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:38:47	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:38:47	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:38:47	 Checking devcon integrity
+22/10/2022 01:38:47	 Devcon is valid
+22/10/2022 01:38:47	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 01:38:47	 Alert : Alert
+22/10/2022 01:38:47	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:39:53	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:39:53	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:39:53	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:39:53	 Checking devcon integrity
+22/10/2022 01:39:53	 Devcon is valid
+22/10/2022 01:39:55	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Remove failed
+No devices were removed.
+22/10/2022 01:39:55	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:41:55	 Program exec error
+22/10/2022 01:42:23	 Starting the device remove daemon.......
+22/10/2022 01:42:23	 Agent start
+22/10/2022 01:42:32	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:42:32	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:42:32	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:42:32	 Checking devcon integrity
+22/10/2022 01:42:32	 Devcon is valid
+22/10/2022 01:42:34	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 01:42:34	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:42:34	 Alert : Alert
+22/10/2022 01:42:36	 Program exec error
+22/10/2022 01:44:12	 Starting the device remove daemon.......
+22/10/2022 01:44:12	 Agent start
+22/10/2022 01:44:18	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:44:18	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:44:18	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:44:18	 Checking devcon integrity
+22/10/2022 01:44:18	 Devcon is valid
+22/10/2022 01:44:19	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 01:44:19	 Alert : Alert
+22/10/2022 01:44:19	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:44:28	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:44:28	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:44:28	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:44:28	 Checking devcon integrity
+22/10/2022 01:44:28	 Devcon is valid
+22/10/2022 01:44:29	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 01:44:29	 Alert : Alert
+22/10/2022 01:44:29	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:44:32	 Program exec error
+22/10/2022 01:45:18	 Starting the device remove daemon.......
+22/10/2022 01:45:18	 Agent start
+22/10/2022 01:45:22	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:45:22	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:45:22	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:45:22	 Checking devcon integrity
+22/10/2022 01:45:22	 Devcon is valid
+22/10/2022 01:45:24	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 01:45:24	 Alert : Alert
+22/10/2022 01:45:24	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:45:53	 Program exec error
+22/10/2022 01:45:56	 Starting the device remove daemon.......
+22/10/2022 01:45:56	 Agent start
+22/10/2022 01:46:14	 Program exec error
+22/10/2022 01:46:16	 Starting the device remove daemon.......
+22/10/2022 01:46:16	 Agent start
+22/10/2022 01:46:19	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:46:19	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:46:19	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:46:19	 Checking devcon integrity
+22/10/2022 01:46:19	 Devcon is valid
+22/10/2022 01:46:20	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 01:46:20	 Alert : Alert
+22/10/2022 01:46:20	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:46:27	 Program exec error
+22/10/2022 01:46:45	 Starting the device remove daemon.......
+22/10/2022 01:46:45	 Agent start
+22/10/2022 01:46:47	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:46:47	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:46:47	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:46:47	 Checking devcon integrity
+22/10/2022 01:46:47	 Devcon is valid
+22/10/2022 01:46:48	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 01:46:48	 Alert : Alert
+22/10/2022 01:46:48	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:46:54	 Program exec error
+22/10/2022 01:48:37	 Starting the device remove daemon.......
+22/10/2022 01:48:37	 Agent start
+22/10/2022 01:48:39	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:48:39	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:48:39	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:48:39	 Checking devcon integrity
+22/10/2022 01:48:39	 Devcon is valid
+22/10/2022 01:48:40	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 01:48:40	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:48:40	 Alert : Alert
+22/10/2022 01:48:55	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:48:55	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:48:55	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:48:55	 Checking devcon integrity
+22/10/2022 01:48:55	 Devcon is valid
+22/10/2022 01:48:56	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 01:48:56	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:48:56	 Alert : Alert
+22/10/2022 01:49:05	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:49:05	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:49:05	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:49:05	 Checking devcon integrity
+22/10/2022 01:49:05	 Devcon is valid
+22/10/2022 01:49:07	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 01:49:07	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:49:07	 Alert : Alert
+22/10/2022 01:49:21	 Program exec error
+22/10/2022 01:50:17	 Starting the device remove daemon.......
+22/10/2022 01:50:17	 Agent start
+22/10/2022 01:50:18	 Program exec error
+22/10/2022 01:50:45	 Starting the device remove daemon.......
+22/10/2022 01:50:45	 Agent start
+22/10/2022 01:50:57	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 01:50:57	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 01:50:57	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 01:50:57	 Checking devcon integrity
+22/10/2022 01:50:57	 Devcon is valid
+22/10/2022 01:50:59	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 01:50:59	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 01:50:59	 Alert : Alert
+22/10/2022 01:51:03	 Program exec error
+22/10/2022 02:01:09	 Starting the device remove daemon.......
+22/10/2022 02:01:09	 Agent start
+22/10/2022 02:01:11	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0638
+22/10/2022 02:01:11	 Device remove thread start for USB Mass Storage Device:1
+22/10/2022 02:01:11	 Inside device remove thread : USB Mass Storage Device:1
+22/10/2022 02:01:11	 Checking devcon integrity
+22/10/2022 02:01:11	 Devcon is valid
+22/10/2022 02:01:13	 devcon output : USB Mass Storage Device:1 : USB\VID_0718&PID_0638\07A10603AD5E64C2                      : Removed
+1 device(s) were removed.
+22/10/2022 02:01:13	 Alert : Alert
+22/10/2022 02:01:13	 Device remove thread ended for USB Mass Storage Device:1
+22/10/2022 02:01:16	 Program exec error

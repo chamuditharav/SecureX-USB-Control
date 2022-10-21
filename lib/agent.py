@@ -93,13 +93,18 @@ def disableUSB(devcon,device):
             pprint(usb_devices[device])
             pushLog(f"Inside device remove thread : {device}")
             devconIntegrity(devcon)
-            proc = subprocess.run([devcon, 'remove', usb_devices[device]], capture_output=True)
-            out = proc.stdout.decode().strip()
+            proc = subprocess.Popen([devcon, 'remove', usb_devices[device]],  stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
+            stdout, stderr = proc.communicate()
+            #print(stdout.decode())
+
+            #out = proc.stdout.decode().strip()
+            out = stdout.decode().strip()
+
             pushLog(f"devcon output : {device} : {out}")
             if("1 device(s) were removed" in out):
                 msgBox_Thread = Thread(target=showAlert, args=('Alert', 'You are not allowed to use the plugged USB device'), daemon=True)
                 msgBox_Thread.start()
-            
+
 
         else:
             pprint("Already disabled or Device error!")
@@ -109,10 +114,11 @@ def disableUSB(devcon,device):
     return 0
 
 
-def disableUSB_daemon():
-    for device in usb_device_list:
-        pass
-        #pprint(usb_devices[device])
+def disableUSB_daemon(devcon):
+    if(len(usb_device_list)>0):
+        for device in usb_device_list:
+            pushLog(f"Forced eject daemon : {device}")
+            disableUSB(devcon,device)
     return 0
 
 
@@ -152,11 +158,11 @@ def usbWatchdog_service(devcon,limit):
     pushLog("Agent start")
 
     while True:
-        #subprocess.run([devcon, 'hwids', '=usb'], capture_output=True, text=True)
         get_usb_device()
 
-        # if(len(usb_device_list_old)==0):
-        #     usb_device_list_old = usb_device_list.copy()
+        disableUSB_Thread = Thread(target=disableUSB_daemon, args=(devcon,))
+        disableUSB_Thread.start()
+        disableUSB_Thread.join() 
 
         if(set(usb_device_list) != set(usb_device_list_old)):
             new_devices = (list(set(usb_device_list).difference(set(usb_device_list_old))))

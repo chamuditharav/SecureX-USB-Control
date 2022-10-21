@@ -1,4 +1,8 @@
 import subprocess
+import signal
+import os
+
+import win32ui
 
 import win32com.client
 
@@ -26,7 +30,7 @@ for usb in wmi.InstancesOf ("Win32_USBHub"):
 # Fetches the list of all usb devices:
 
 
-subprocess.run(['devcon', 'hwids', '=usb'], capture_output=True, text=True)
+#res = subprocess.run(['devcon', 'hwids', '=usb'], capture_output=True, text=True)
 
 #print(res)
 
@@ -37,6 +41,33 @@ subprocess.run(['devcon', 'hwids', '=usb'], capture_output=True, text=True)
 
 #USB\VID_0718&PID_0638
 
-subprocess.run(["devcon", 'remove', "USB\\VID_0718&PID_0638"]) #USB\VID_0EA0&PID_2168
+# proc = subprocess.run(["devcon", 'remove', "USB\\VID_0718&PID_0638"]) #USB\VID_0EA0&PID_2168
+proc = subprocess.run(["devcon", 'remove', "USB\\VID_0718&PID_0638"], capture_output=True) #USB\VID_0EA0&PID_2168
+out = proc.stdout.decode().strip()
+
+print(out)
+print("1 device(s) were removed" in out)
+
+#os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+
+
 
 #subprocess.run(['devcon', 'enable', "USB\\VID_0EA0&PID_2168"])
+
+
+
+
+'''
+
+def process_exists(process_name):
+    progs = str(subprocess.check_output('tasklist'))
+    if process_name in progs:
+        return True
+    else:
+        return False
+
+if process_exists('CalculatorApp.exe'):
+    print("dsadsad")
+else:
+    print("84855151")
+    '''

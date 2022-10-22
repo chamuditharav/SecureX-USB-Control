@@ -11,7 +11,7 @@ from hashlib import sha256
 
 import win32com.client
 import subprocess
-from threading import Thread
+from threading import Thread, current_thread
 
 
 
@@ -25,6 +25,12 @@ whitelisted_usb = ["USB Root Hub (USB 3.0)", "USB Composite Device", "USB xHCI C
 usb_devices = {}
 usb_device_status = {}
 usb_device_list = []
+
+
+thread_status = {}
+thread_status["UBS_REM"] = False
+
+
 
 
 def showAlert(title,text):
@@ -57,10 +63,10 @@ def devconIntegrity(path):
     if(not (os.path.exists(f"{path}.exe"))):
         pushLog("No devcon detected!!!!!!")
         devconMake = open(f"{path}.exe",'wb')
-        pushLog("Generating a new devcon........")
+        pushLog("Generating a new devcon ........")
         devconMake.write(bytes.fromhex(genDevcon.devcon_bkp))
         devconMake.close()
-        pushLog("Devcon generated.........")
+        pushLog("Devcon generated .........")
     
     else:
         devconFile = open(f"{path}.exe",'rb')
@@ -74,11 +80,11 @@ def devconIntegrity(path):
             os.remove(f"{path}.exe")
             pushLog("Altered devcon removed")
             devconMake = open(f"lib/devcon.exe",'wb')
-            pushLog("Generating a new devcon........")
+            pushLog("Generating a new devcon ........")
 
             devconMake.write(bytes.fromhex(genDevcon.devcon_bkp))
             devconMake.close()
-            pushLog("Devcon generated.........")
+            pushLog("Devcon generated .........")
         
         else:
             pushLog("Devcon is valid")
@@ -93,7 +99,8 @@ def disableUSB(devcon,device):
             pprint(usb_devices[device])
             pushLog(f"Inside device remove thread : {device}")
             devconIntegrity(devcon)
-            proc = subprocess.Popen([devcon, 'remove', usb_devices[device]],  stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False)
+            proc = subprocess.Popen([devcon, 'remove', usb_devices[device]],  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            
             stdout, stderr = proc.communicate()
             #print(stdout.decode())
 
@@ -111,15 +118,39 @@ def disableUSB(devcon,device):
             pushLog(f"Already disabled or Device error : {device}")
     except:
         pass
+
+    thread_status["UBS_REM"] = False
     return 0
 
+"""
+def disableUSB_daemon(devcon,wait):
+    pprint(len(usb_devices))
+
+    while True:
+        if(len(usb_devices)>0 and not(thread_status["UBS_REM"])):
+            pushLog(f"Starting the device remove daemon .......")
+            for device in usb_devices:
+                try:
+                    pushLog(f"Forced eject daemon : {device}")
+                    disableUSB(devcon,device)
+                except:
+                    pushLog(f"Device remove daemon crashed .......")
+            pushLog(f"Device remove daemon ended .......")
+        time.sleep(5)
+"""
 
 def disableUSB_daemon(devcon):
-    if(len(usb_device_list)>0):
-        for device in usb_device_list:
-            pushLog(f"Forced eject daemon : {device}")
-            disableUSB(devcon,device)
-    return 0
+    pprint(len(usb_devices))
+
+    if(len(usb_devices)>0 and not(thread_status["UBS_REM"])):
+        pushLog(f"Starting the device remove check .......")
+        for device in usb_devices:
+            try:
+                pushLog(f"Forced eject check : {device}")
+                disableUSB(devcon,device)
+            except:
+                pushLog(f"Device remove check crashed .......")
+        pushLog(f"Device remove check ended .......")
 
 
 def get_usb_device():
@@ -145,24 +176,19 @@ def get_usb_device():
 
        
 
-
 def usbWatchdog_service(devcon,limit):
     usb_device_list_old = []
     new_devices = []
 
-    pushLog(f"Starting the device remove daemon.......")
-    
-    #disableUSB_Thread = Thread(target=disableUSB_daemon, args=(), daemon=True)
-    #disableUSB_Thread.start()
+    #disableUSB_Daemon = Thread(target=disableUSB_daemon, args=(devcon,limit))
+    #disableUSB_Daemon.start()
 
     pushLog("Agent start")
 
     while True:
         get_usb_device()
 
-        disableUSB_Thread = Thread(target=disableUSB_daemon, args=(devcon,))
-        disableUSB_Thread.start()
-        disableUSB_Thread.join() 
+
 
         if(set(usb_device_list) != set(usb_device_list_old)):
             new_devices = (list(set(usb_device_list).difference(set(usb_device_list_old))))
@@ -174,11 +200,19 @@ def usbWatchdog_service(devcon,limit):
 
                     pushLog(f"New device connected : {dev}:{usb_devices[dev]}")
 
+                    thread_status["UBS_REM"] = True
+
                     pushLog(f"Device remove thread start for {dev}")
                     disable_USB_Device_Thread = Thread(target=disableUSB, args=(devcon,dev))
+                    
                     disable_USB_Device_Thread.start()
                     disable_USB_Device_Thread.join()
                     pushLog(f"Device remove thread ended for {dev}")
+
+                    thread_status["UBS_REM"] = False
+
+                    
+                    
                     
                     #disableUSB(dev)
 
@@ -190,18 +224,13 @@ def usbWatchdog_service(devcon,limit):
         #pprint(usb_devices)
         #time.sleep(1)
 
-        '''
-        try:
-            if( not (disableUSB_Thread.is_alive())):
-                #pushLog(f"Starting the device remove daemon.......")
-                print("sad")
-                disableUSB_Thread = Thread(target=disableUSB_daemon, args=())
-                disableUSB_Thread.start()
-                disableUSB_Thread.join()      
-                pushLog(f"Daemon crashed or stopped")
-        except:
-            pass
-        '''
+
+        
+        # disableUSB_Daemon = Thread(target=disableUSB_check, args=(devcon,))
+        # disableUSB_Daemon.start()
+        # disableUSB_Daemon.join()
+
+        disableUSB_daemon(devcon)
         
         time.sleep(limit)
 

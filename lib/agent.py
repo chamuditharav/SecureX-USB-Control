@@ -11,7 +11,11 @@ from hashlib import sha256
 
 import win32com.client
 import subprocess
-from threading import Thread, current_thread
+from threading import Thread
+
+
+from tkinter import *
+from tkinter import messagebox
 
 
 
@@ -32,11 +36,19 @@ thread_status["UBS_REM"] = False
 
 
 
+def showAlertTk(title,text):
+    top = Tk()
+    top.withdraw()
+    top.wm_attributes("-topmost", 1)
+    messagebox.showerror(title=title, message=text, parent=top)
+    #top.mainloop()
+    top.destroy()
 
-def showAlert(title,text):
+
+def showAlertNative(title,text):
     pushLog(f"Alert : {title}")
     MessageBox = windll.user32.MessageBoxW
-    MessageBox(None, text, title, 0)
+    MessageBox(None, text, title, 16)
 
 def pprint(context):
     if (developer_mode):
@@ -109,16 +121,17 @@ def disableUSB(devcon,device):
 
             pushLog(f"devcon output : {device} : {out}")
             if("1 device(s) were removed" in out):
-                msgBox_Thread = Thread(target=showAlert, args=('Alert', 'You are not allowed to use the plugged USB device'), daemon=True)
+                msgBox_Thread = Thread(target=showAlertTk, args=('Alert', 'You are not allowed to use the plugged USB device'), daemon=False)
                 msgBox_Thread.start()
-                msgBox_Thread.join()
+                #msgBox_Thread.join()
+
 
 
         else:
             pprint("Already disabled or Device error!")
             pushLog(f"Already disabled or Device error : {device}")
-    except:
-        pass
+    except Exception as e:
+        pushLog(f"Disable USB crashed -> {e}")
 
     thread_status["UBS_REM"] = False
     return 0
@@ -134,7 +147,7 @@ def disableUSB_daemon(devcon,wait):
                 try:
                     pushLog(f"Forced eject daemon : {device}")
                     disableUSB(devcon,device)
-                except:
+                except Exception as e:
                     pushLog(f"Device remove daemon crashed .......")
             pushLog(f"Device remove daemon ended .......")
         time.sleep(5)
@@ -149,8 +162,8 @@ def disableUSB_daemon(devcon):
             try:
                 pushLog(f"Forced eject check : {device}")
                 disableUSB(devcon,device)
-            except:
-                pushLog(f"Device remove check crashed .......")
+            except Exception as e:
+                pushLog(f"USB disable daemon crashed -> {e}")
         pushLog(f"Device remove check ended .......")
 
 
@@ -169,8 +182,9 @@ def get_usb_device():
                 usb_device_status[dev_description] = usb.Status
                 usb_device_list.append(dev_description)
           
-    except Exception as error:
-        pprint('error', error)
+    except Exception as e:
+        pushLog(f"UpdateUSB crashed -> {e}")
+        pprint('error', e)
     
     return 0
     
@@ -184,12 +198,16 @@ def usbWatchdog_service(devcon,limit):
     #disableUSB_Daemon = Thread(target=disableUSB_daemon, args=(devcon,limit))
     #disableUSB_Daemon.start()
 
+    pushLog("-"*100)
     pushLog("Agent start")
 
     while True:
         get_usb_device()
 
-
+        #disableUSB_daemon(devcon)
+        disableDaemon = Thread(target=disableUSB_daemon, args=(devcon,))
+        disableDaemon.start()
+        disableDaemon.join()
 
         if(set(usb_device_list) != set(usb_device_list_old)):
             new_devices = (list(set(usb_device_list).difference(set(usb_device_list_old))))
@@ -212,26 +230,14 @@ def usbWatchdog_service(devcon,limit):
 
                     thread_status["UBS_REM"] = False
 
-                    
-                    
-                    
-                    #disableUSB(dev)
-
             usb_device_list_old = usb_device_list.copy()
         else:
             usb_device_list_old = usb_device_list.copy()
 
+
         #pprint(usb_device_list)
         #pprint(usb_devices)
         #time.sleep(1)
-
-
-        
-        # disableUSB_Daemon = Thread(target=disableUSB_check, args=(devcon,))
-        # disableUSB_Daemon.start()
-        # disableUSB_Daemon.join()
-
-        disableUSB_daemon(devcon)
         
         time.sleep(limit)
 

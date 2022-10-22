@@ -111,6 +111,7 @@ def disableUSB(devcon,device):
             if("1 device(s) were removed" in out):
                 msgBox_Thread = Thread(target=showAlert, args=('Alert', 'You are not allowed to use the plugged USB device'), daemon=True)
                 msgBox_Thread.start()
+                msgBox_Thread.join()
 
 
         else:

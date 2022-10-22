@@ -204,10 +204,11 @@ def usbWatchdog_service(devcon,limit):
     while True:
         get_usb_device()
 
-        #disableUSB_daemon(devcon)
-        disableDaemon = Thread(target=disableUSB_daemon, args=(devcon,))
-        disableDaemon.start()
-        disableDaemon.join()
+        disableUSB_daemon(devcon)
+
+        # disableDaemon = Thread(target=disableUSB_daemon, args=(devcon,))
+        # disableDaemon.start()
+        # disableDaemon.join()
 
         if(set(usb_device_list) != set(usb_device_list_old)):
             new_devices = (list(set(usb_device_list).difference(set(usb_device_list_old))))

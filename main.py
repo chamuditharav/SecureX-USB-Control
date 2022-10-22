@@ -26,6 +26,7 @@ def devconIntegrity():
 if __name__ == "__main__":
 
 
+#put while here
     try:
         devconIntegrity()
         devcon = f"{os.getcwd()}\lib\devcon"

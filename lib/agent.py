@@ -37,25 +37,6 @@ thread_status = {}
 
 
 
-
-def showAlertTk(title,text):
-        top = Tk()
-        top.withdraw()
-        top.wm_attributes("-topmost", 1)
-        messagebox.showerror(title=title, message=text, parent=top)
-        #top.mainloop()
-        top.destroy()
-
-
-def showAlertNative(title,text):
-    pushLog(f"Alert : {title}")
-    MessageBox = windll.user32.MessageBoxW
-    MessageBox(None, text, title, 16)
-
-def pprint(context):
-    if (developer_mode):
-        print(context)
-
 def pushLog(logInfo):
     if(not os.path.isdir('logs')):
         os.mkdir('logs')
@@ -69,6 +50,27 @@ def pushLog(logInfo):
         logLine = f"{timeFrame}\t {logInfo}\n"
         logfile.write(logLine)
         logfile.close()
+
+
+def showAlertTk(title,text):
+        top = Tk()
+        top.withdraw()
+        top.wm_attributes("-topmost", 1)
+        messagebox.showerror(title=title, message=text, parent=top)
+        top.mainloop()
+        top.destroy()
+
+
+def showAlertNative(title,text):
+    #pushLog(f"Alert : {title}")
+    MessageBox = windll.user32.MessageBoxW
+    #MessageBox(None, text, title, 16)
+    MessageBox(None, text, title, 0x40010) #0x1010
+
+
+def pprint(context):
+    if (developer_mode):
+        print(context)
 
 
 
@@ -116,7 +118,7 @@ def failSafe():
     for drive in drives:
         os.system(f'powershell.exe -WindowStyle hidden $driveEject = New-Object -comObject Shell.Application; $driveEject.Namespace(17).ParseName("""{drive}""").InvokeVerb("""Eject"""); start-sleep -s 3')
 
-    showAlertTk("SecureX USB Agent Alert","PLEASE REMOVE THE PLUGGED USB DEVICE!")
+    showAlertNative("SecureX USB Agent Alert","PLEASE REMOVE THE PLUGGED USB DEVICE!")
 
 
 def disableUSB(devcon,device):
@@ -134,7 +136,7 @@ def disableUSB(devcon,device):
 
             pushLog(f"devcon output : {device} : {out}")
             if(("1 device(s) were removed" in out) or ("1 device(s) disabled" in out)):
-                msgBox_Thread = Thread(target=showAlertTk, args=('SecureX USB Agent Alert', 'You are not allowed to use the plugged USB device'), daemon=False)
+                msgBox_Thread = Thread(target=showAlertNative, args=('SecureX USB Agent Alert', 'You are not allowed to use the plugged USB device'), daemon=False)
                 msgBox_Thread.start()
                 #msgBox_Thread.join()
 
@@ -231,7 +233,7 @@ def usbWatchdog_service(devcon,limit,whitelisted_usb):
                     
                     elif(usb_device_status[dev] == "Error"):
                         pushLog(f"Connected a device that already disabled {dev}")
-                        msgBox_Thread = Thread(target=showAlertTk, args=('SecureX USB Agent Alert', 'You are not allowed to use the plugged USB device'), daemon=False)
+                        msgBox_Thread = Thread(target=showAlertNative, args=('SecureX USB Agent Alert', 'You are not allowed to use the plugged USB device'), daemon=False)
                         msgBox_Thread.start()
 
 

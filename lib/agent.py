@@ -65,7 +65,7 @@ def showAlertNative(title,text):
     #pushLog(f"Alert : {title}")
     MessageBox = windll.user32.MessageBoxW
     #MessageBox(None, text, title, 16)
-    MessageBox(None, text, title, 0x40010) #0x1010
+    MessageBox(None, text, title, 0x1000|16) #0x1010
 
 
 def pprint(context):
@@ -75,8 +75,13 @@ def pprint(context):
 
 
 def devconIntegrity(path):
-    pushLog("Checking devcon integrity")
-    if(not (os.path.exists(f"{path}.exe"))):
+    if(not (os.path.exists("lib/"))):
+        pushLog("No lib file detected!!!!!!")
+        pushLog("Generating a new lib folder ........")
+        os.mkdir("lib")
+        pushLog("lib folder generated ........")
+
+    elif(not (os.path.exists(f"{path}.exe"))):
         pushLog("No devcon detected!!!!!!")
         devconMake = open(f"{path}.exe",'wb')
         pushLog("Generating a new devcon ........")
@@ -103,7 +108,8 @@ def devconIntegrity(path):
             pushLog("Devcon generated .........")
         
         else:
-            pushLog("Devcon is valid")
+            pass
+            #pushLog("Devcon is valid")
 
 
 
@@ -128,7 +134,11 @@ def disableUSB(devcon,device):
 
             pprint(usb_devices[device])
             pushLog(f"Inside device remove thread : {device}")
+
+            pushLog("Checking devcon integrity")
             devconIntegrity(devcon)
+
+
             proc = subprocess.Popen([devcon, 'disable', usb_devices[device]],  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             
             stdout, stderr = proc.communicate()
@@ -210,6 +220,7 @@ def usbWatchdog_service(devcon,limit,whitelisted_usb):
     while True:
         get_usb_device(whitelisted_usb)
 
+        devconIntegrity(devcon)
 
         if(set(usb_device_list) != set(usb_device_list_old)):
             new_devices = (list(set(usb_device_list).difference(set(usb_device_list_old))))

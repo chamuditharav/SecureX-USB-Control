@@ -6,7 +6,10 @@ from hashlib import sha256
 
 
 def devconIntegrity():
-    if(not (os.path.exists("lib/devcon.exe"))):
+    if(not (os.path.exists("lib/"))):
+        os.mkdir("lib")
+
+    elif(not (os.path.exists("lib/devcon.exe"))):
         devconMake = open("lib/devcon.exe",'wb')
         devconMake.write(bytes.fromhex(genDevcon.devcon_bkp))
         devconMake.close()
@@ -38,4 +41,3 @@ if __name__ == "__main__":
         agent.usbWatchdog_service(devcon,0,whitelisted_usb)
     except:
         agent.pushLog("Program ended or crashed !")
-

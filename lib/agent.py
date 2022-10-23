@@ -17,7 +17,9 @@ from threading import Thread
 from tkinter import *
 from tkinter import messagebox
 
-
+import win32api
+import win32con
+import win32file
 
 
 developer_mode = False;
@@ -32,17 +34,17 @@ usb_device_list = []
 
 
 thread_status = {}
-thread_status["UBS_REM"] = False
+
 
 
 
 def showAlertTk(title,text):
-    top = Tk()
-    top.withdraw()
-    top.wm_attributes("-topmost", 1)
-    messagebox.showerror(title=title, message=text, parent=top)
-    #top.mainloop()
-    top.destroy()
+        top = Tk()
+        top.withdraw()
+        top.wm_attributes("-topmost", 1)
+        messagebox.showerror(title=title, message=text, parent=top)
+        #top.mainloop()
+        top.destroy()
 
 
 def showAlertNative(title,text):
@@ -103,6 +105,20 @@ def devconIntegrity(path):
 
 
 
+def detectRemovableDrives():
+    drives = [i for i in win32api.GetLogicalDriveStrings().split('\x00') if i]
+    rdrives = [d for d in drives if win32file.GetDriveType(d) == win32con.DRIVE_REMOVABLE]
+    return rdrives
+
+
+def failSafe():
+    drives = detectRemovableDrives()
+    for drive in drives:
+        os.system(f'powershell.exe -WindowStyle hidden $driveEject = New-Object -comObject Shell.Application; $driveEject.Namespace(17).ParseName("""{drive}""").InvokeVerb("""Eject"""); start-sleep -s 3')
+
+    showAlertTk("SecureX USB agent","PLEASE REMOVE THE PLUGGED USB DEVICE!")
+
+
 def disableUSB(devcon,device):
     pprint(f"Disabling {device} ......")
     try:
@@ -111,60 +127,46 @@ def disableUSB(devcon,device):
             pprint(usb_devices[device])
             pushLog(f"Inside device remove thread : {device}")
             devconIntegrity(devcon)
-            proc = subprocess.Popen([devcon, 'remove', usb_devices[device]],  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            proc = subprocess.Popen([devcon, 'disable', usb_devices[device]],  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             
             stdout, stderr = proc.communicate()
-            #print(stdout.decode())
-
-            #out = proc.stdout.decode().strip()
             out = stdout.decode().strip()
 
             pushLog(f"devcon output : {device} : {out}")
-            if("1 device(s) were removed" in out):
-                msgBox_Thread = Thread(target=showAlertTk, args=('Alert', 'You are not allowed to use the plugged USB device'), daemon=False)
+            if(("1 device(s) were removed" in out) or ("1 device(s) disabled" in out)):
+                msgBox_Thread = Thread(target=showAlertTk, args=('SecureX USB agent', 'You are not allowed to use the plugged USB device'), daemon=False)
                 msgBox_Thread.start()
                 #msgBox_Thread.join()
 
 
-
+        elif(usb_device_status[device]=="Error"):
+            pass
         else:
             pprint("Already disabled or Device error!")
             pushLog(f"Already disabled or Device error : {device}")
     except Exception as e:
         pushLog(f"Disable USB crashed -> {e}")
 
-    thread_status["UBS_REM"] = False
+  
     return 0
 
-"""
-def disableUSB_daemon(devcon,wait):
-    pprint(len(usb_devices))
 
-    while True:
-        if(len(usb_devices)>0 and not(thread_status["UBS_REM"])):
-            pushLog(f"Starting the device remove daemon .......")
-            for device in usb_devices:
-                try:
-                    pushLog(f"Forced eject daemon : {device}")
-                    disableUSB(devcon,device)
-                except Exception as e:
-                    pushLog(f"Device remove daemon crashed .......")
-            pushLog(f"Device remove daemon ended .......")
-        time.sleep(5)
-"""
+
+
 
 def disableUSB_daemon(devcon):
     pprint(len(usb_devices))
-
-    if(len(usb_devices)>0 and not(thread_status["UBS_REM"])):
-        pushLog(f"Starting the device remove check .......")
+    if(len(usb_devices)>0):
+        #pushLog(f"Starting the device disable check .......")
         for device in usb_devices:
-            try:
-                pushLog(f"Forced eject check : {device}")
-                disableUSB(devcon,device)
-            except Exception as e:
-                pushLog(f"USB disable daemon crashed -> {e}")
-        pushLog(f"Device remove check ended .......")
+            if(usb_device_status[device]=="OK"):
+                try:
+                    pushLog(f"Forced disable check : {device}")
+                    disableUSB(devcon,device)
+                except Exception as e:
+                    pushLog(f"USB disable daemon crashed -> {e}")
+            #pushLog(f"Device disable check ended .......")
+ 
 
 
 def get_usb_device():
@@ -195,8 +197,6 @@ def usbWatchdog_service(devcon,limit):
     usb_device_list_old = []
     new_devices = []
 
-    #disableUSB_Daemon = Thread(target=disableUSB_daemon, args=(devcon,limit))
-    #disableUSB_Daemon.start()
 
     pushLog("-"*100)
     pushLog("Agent start")
@@ -204,11 +204,6 @@ def usbWatchdog_service(devcon,limit):
     while True:
         get_usb_device()
 
-        disableUSB_daemon(devcon)
-
-        # disableDaemon = Thread(target=disableUSB_daemon, args=(devcon,))
-        # disableDaemon.start()
-        # disableDaemon.join()
 
         if(set(usb_device_list) != set(usb_device_list_old)):
             new_devices = (list(set(usb_device_list).difference(set(usb_device_list_old))))
@@ -220,17 +215,23 @@ def usbWatchdog_service(devcon,limit):
 
                     pushLog(f"New device connected : {dev}:{usb_devices[dev]}")
 
-                    thread_status["UBS_REM"] = True
+                    if(usb_device_status[dev] == "OK"):
 
-                    pushLog(f"Device remove thread start for {dev}")
-                    disable_USB_Device_Thread = Thread(target=disableUSB, args=(devcon,dev))
+                        pushLog(f"Device disable thread start for {dev}")
+
+                        disable_USB_Device_Thread = Thread(target=disableUSB, args=(devcon,dev))
+                        disable_USB_Device_Thread.start()
+                        disable_USB_Device_Thread.join()
+
+                        pushLog(f"Device disable thread ended for {dev}")
                     
-                    disable_USB_Device_Thread.start()
-                    disable_USB_Device_Thread.join()
-                    pushLog(f"Device remove thread ended for {dev}")
+                    elif(usb_device_status[dev] == "Error"):
+                        pushLog(f"Connected a device that already disabled {dev}")
+                        msgBox_Thread = Thread(target=showAlertTk, args=('SecureX USB agent', 'You are not allowed to use the plugged USB device'), daemon=False)
+                        msgBox_Thread.start()
 
-                    thread_status["UBS_REM"] = False
 
+            get_usb_device()                    
             usb_device_list_old = usb_device_list.copy()
         else:
             usb_device_list_old = usb_device_list.copy()
@@ -239,6 +240,12 @@ def usbWatchdog_service(devcon,limit):
         #pprint(usb_device_list)
         #pprint(usb_devices)
         #time.sleep(1)
+
+        disable_Daemon = Thread(target=disableUSB_daemon, args=(devcon,))
+        disable_Daemon.start()
+        disable_Daemon.join()
+
+        #disableUSB_daemon(devcon)
         
         time.sleep(limit)
 

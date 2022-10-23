@@ -38,6 +38,6 @@ if __name__ == "__main__":
     try:
         devconIntegrity()
         devcon = f"{os.getcwd()}\lib\devcon"
-        agent.usbWatchdog_service(devcon,0,whitelisted_usb)
+        agent.usbWatchdog_service(devcon,0.1,whitelisted_usb)
     except:
         agent.pushLog("Program ended or crashed !")

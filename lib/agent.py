@@ -24,9 +24,9 @@ import win32file
 
 developer_mode = False;
 
-whitelisted_usb = ["USB Root Hub (USB 3.0)", "USB Composite Device", "USB xHCI Compliant Host Controller","Generic USB Hub"]
+#whitelisted_usb = ["USB Root Hub (USB 3.0)", "USB Composite Device", "USB xHCI Compliant Host Controller","Generic USB Hub", "07A10603AD5E64C2"]
 
-#whitelisted_usb = "USB Root Hub (USB 3.0) USB Composite Device Generic USB Hub"
+
 
 usb_devices = {}
 usb_device_status = {}
@@ -116,7 +116,7 @@ def failSafe():
     for drive in drives:
         os.system(f'powershell.exe -WindowStyle hidden $driveEject = New-Object -comObject Shell.Application; $driveEject.Namespace(17).ParseName("""{drive}""").InvokeVerb("""Eject"""); start-sleep -s 3')
 
-    showAlertTk("SecureX USB agent","PLEASE REMOVE THE PLUGGED USB DEVICE!")
+    showAlertTk("SecureX USB Agent Alert","PLEASE REMOVE THE PLUGGED USB DEVICE!")
 
 
 def disableUSB(devcon,device):
@@ -134,7 +134,7 @@ def disableUSB(devcon,device):
 
             pushLog(f"devcon output : {device} : {out}")
             if(("1 device(s) were removed" in out) or ("1 device(s) disabled" in out)):
-                msgBox_Thread = Thread(target=showAlertTk, args=('SecureX USB agent', 'You are not allowed to use the plugged USB device'), daemon=False)
+                msgBox_Thread = Thread(target=showAlertTk, args=('SecureX USB Agent Alert', 'You are not allowed to use the plugged USB device'), daemon=False)
                 msgBox_Thread.start()
                 #msgBox_Thread.join()
 
@@ -169,20 +169,24 @@ def disableUSB_daemon(devcon):
  
 
 
-def get_usb_device():
+def get_usb_device(whitelisted_usb):
     usb_devices.clear()
     usb_device_status.clear()
     usb_device_list.clear()
     try:
         wmi = win32com.client.GetObject("winmgmts:")
         for usb in wmi.InstancesOf("Win32_USBHub"):
-            if(usb.description.strip() not in whitelisted_usb):
+            
+            if((usb.description.strip() not in whitelisted_usb) and (usb.DeviceID.strip().split("\\")[-1] not in whitelisted_usb)):
+                #pushLog(f"HWID -> {usb.DeviceID.strip()}")
                 hid = str(usb.DeviceID)
                 hid = hid.split("\\")
                 dev_description = f"{usb.description}:{len(usb_devices)+1}"
                 usb_devices[dev_description] = hid[0] + "\\" + hid[1]
                 usb_device_status[dev_description] = usb.Status
                 usb_device_list.append(dev_description)
+
+
           
     except Exception as e:
         pushLog(f"UpdateUSB crashed -> {e}")
@@ -193,7 +197,7 @@ def get_usb_device():
 
        
 
-def usbWatchdog_service(devcon,limit):
+def usbWatchdog_service(devcon,limit,whitelisted_usb):
     usb_device_list_old = []
     new_devices = []
 
@@ -202,7 +206,7 @@ def usbWatchdog_service(devcon,limit):
     pushLog("Agent start")
 
     while True:
-        get_usb_device()
+        get_usb_device(whitelisted_usb)
 
 
         if(set(usb_device_list) != set(usb_device_list_old)):
@@ -221,17 +225,17 @@ def usbWatchdog_service(devcon,limit):
 
                         disable_USB_Device_Thread = Thread(target=disableUSB, args=(devcon,dev))
                         disable_USB_Device_Thread.start()
-                        disable_USB_Device_Thread.join()
+                        #disable_USB_Device_Thread.join()
 
                         pushLog(f"Device disable thread ended for {dev}")
                     
                     elif(usb_device_status[dev] == "Error"):
                         pushLog(f"Connected a device that already disabled {dev}")
-                        msgBox_Thread = Thread(target=showAlertTk, args=('SecureX USB agent', 'You are not allowed to use the plugged USB device'), daemon=False)
+                        msgBox_Thread = Thread(target=showAlertTk, args=('SecureX USB Agent Alert', 'You are not allowed to use the plugged USB device'), daemon=False)
                         msgBox_Thread.start()
 
 
-            get_usb_device()                    
+            get_usb_device(whitelisted_usb)                    
             usb_device_list_old = usb_device_list.copy()
         else:
             usb_device_list_old = usb_device_list.copy()
@@ -252,5 +256,3 @@ def usbWatchdog_service(devcon,limit):
 
 if __name__ == "__main__":
     pass
-    #pprint(os.getcwd())
-    #usbWatchdog_service(f"{os.getcwd()}\devcon")

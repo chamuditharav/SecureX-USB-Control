@@ -28,17 +28,15 @@ def devconIntegrity():
 
 if __name__ == "__main__":
 
-    whitelisted_usb = ["USB Root Hub (USB 3.0)", "USB Composite Device", "USB xHCI Compliant Host Controller","Generic USB Hub"]
 
-
-
-    agent.pushLog(f"\nNew agent instance --> {os.getpid()}")
-
-    for i in range(10):
+    for i in range(1):
         try:
+            whitelisted_usb = ["USB Root Hub (USB 3.0)", "USB Composite Device", "USB xHCI Compliant Host Controller","Generic USB Hub"]
+            agent.pushLog(f"\nNew agent instance --> {os.getpid()}")
+
             devconIntegrity()
             devcon = f"{os.getcwd()}\lib\devcon"
-            agent.usbWatchdog_service(devcon,0.5,whitelisted_usb)
+            agent.usbWatchdog_service(devcon,0.05,whitelisted_usb)
         except:
             agent.pushLog("Program ended or crashed !")
     else:

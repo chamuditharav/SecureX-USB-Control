@@ -35,7 +35,8 @@ def USB():
         print ('\n')
         pass
   
-USB()
+#
+#USB()
 
 
 c = wmi.WMI ()
@@ -47,3 +48,4 @@ for drive in c.Win32_LogicalDisk ():
       print (drive.Caption, drive.VolumeName, DRIVE_TYPES[drive.DriveType])
 
     
+  

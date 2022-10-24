@@ -17,9 +17,9 @@ from threading import Thread
 from tkinter import *
 from tkinter import messagebox
 
-import win32api
-import win32con
-import win32file
+
+
+import psutil
 
 
 developer_mode = False;
@@ -113,18 +113,36 @@ def devconIntegrity(path):
 
 
 
-def detectRemovableDrives():
-    drives = [i for i in win32api.GetLogicalDriveStrings().split('\x00') if i]
-    rdrives = [d for d in drives if win32file.GetDriveType(d) == win32con.DRIVE_REMOVABLE]
-    return rdrives
+def getRemovableDeviceLetters():
+    disks = psutil.disk_partitions()
+    tempArray = []
+    for disc in disks:
+        if("fixed" not in disc.opts):
+            tempArray.append(disc.mountpoint[0])
+    return tempArray
 
+def seriousFailSafe():
+    pushLog(f"SERIOUS FAILSAFE INITIATED ..............................")
+    psFilePath = f'{os.getcwd()}/tmp.ps1'
+    while(len(getRemovableDeviceLetters())>0):
+        drives = getRemovableDeviceLetters()
+        pushLog(f"Detected drives -> {drives}")
 
-def failSafe():
-    drives = detectRemovableDrives()
-    for drive in drives:
-        os.system(f'powershell.exe -WindowStyle hidden $driveEject = New-Object -comObject Shell.Application; $driveEject.Namespace(17).ParseName("""{drive}""").InvokeVerb("""Eject"""); start-sleep -s 3')
-
-    showAlertNative("SecureX USB Agent Alert","PLEASE REMOVE THE PLUGGED USB DEVICE!")
+        #disk = "I"
+        for disk in drives:
+            tmpFile = open(psFilePath,'w')
+            tmpFile.write('$driveEject = New-Object -comObject Shell.Application\n')
+            tmpFile.write('$driveEject.Namespace(17).ParseName("'+disk+':").InvokeVerb("Eject")')
+            tmpFile.close()
+            try:
+                pushLog(f"Ejecting : {disk}")
+                process = subprocess.Popen(['powershell.exe', '-ExecutionPolicy','Unrestricted','./tmp.ps1'])
+                process.communicate()
+            except:
+                pass
+        time.sleep(2)
+    os.remove(psFilePath)
+    pushLog(f"SERIOUS FAILSAFE ENDED ..............................")
 
 
 def failSafeRemove(devcon,device):
@@ -141,6 +159,9 @@ def failSafeRemove(devcon,device):
         if(("1 device(s) were removed" in out) or ("1 device(s) disabled" in out)):
                 msgBox_Thread = Thread(target=showAlertNative, args=('SecureX USB Agent Alert', 'You are not allowed to use the plugged USB device'), daemon=False)
                 msgBox_Thread.start()
+        else:
+            seroidFailSafe_Thread = Thread(target=seriousFailSafe, args=())
+            seroidFailSafe_Thread.start()
                 
     except Exception as e:
         pushLog(f"Fail safe remove -> {e}")
@@ -187,7 +208,7 @@ def disableUSB(devcon,device):
                 msgBox_Thread = Thread(target=showAlertNative, args=('SecureX USB Agent Alert', 'You are not allowed to use the plugged USB device'), daemon=False)
                 msgBox_Thread.start()
                 #msgBox_Thread.join()
-                ejectDisabled(devcon,device)
+                #ejectDisabled(devcon,device)
             elif("The 1 device(s) are ready to be disabled" in out):
                 pushLog(f"Fail Safe Remove triggering ...........")
                 time.sleep(2)
@@ -238,7 +259,6 @@ def get_usb_device(whitelisted_usb):
     try:
         wmi = win32com.client.GetObject("winmgmts:")
         for usb in wmi.InstancesOf("Win32_USBHub"):
-            
             if((usb.description.strip() not in whitelisted_usb) and (usb.DeviceID.strip().split("\\")[-1] not in whitelisted_usb)):
                 #pushLog(f"HWID -> {usb.DeviceID.strip()}")
                 hid = str(usb.DeviceID)
@@ -247,6 +267,7 @@ def get_usb_device(whitelisted_usb):
                 usb_devices[dev_description] = hid[0] + "\\" + hid[1]
                 usb_device_status[dev_description] = usb.Status
                 usb_device_list.append(dev_description)
+                
 
             elif((usb.DeviceID.strip().split("\\")[-1] in whitelisted_usb) and (usb.Status == "Error")):
                 #Enable whitelisted usb if disabled accidentally
@@ -268,6 +289,9 @@ def usbWatchdog_service(devcon,limit,whitelisted_usb):
 
     pushLog("-"*100)
     pushLog("Agent start")
+
+    seroidFailSafe_Thread = Thread(target=seriousFailSafe, args=())
+    seroidFailSafe_Thread.start()
 
     while True:
         get_usb_device(whitelisted_usb)
@@ -298,7 +322,7 @@ def usbWatchdog_service(devcon,limit,whitelisted_usb):
                     
                     elif(usb_device_status[dev] == "Error"):
                         pushLog(f"Connected a device that already disabled {dev}")
-                        ejectDisabled(devcon,dev)
+                        #ejectDisabled(devcon,dev)
                         msgBox_Thread = Thread(target=showAlertNative, args=('SecureX USB Agent Alert', 'You are not allowed to use the plugged USB device'), daemon=False)
                         msgBox_Thread.start()
 

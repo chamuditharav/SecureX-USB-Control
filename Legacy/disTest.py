@@ -11,6 +11,11 @@ import win32com.client
 from threading import Thread
 
 
+import win32api
+import win32con
+import win32file
+
+
 import wmi
 
 def getLetter(deviceID):
@@ -116,7 +121,7 @@ def Logical():
         # pprint.pprint (vars(usb))
         # print usb.__dict__
 
-        print(drive.Caption, drive.VolumeName, drive.PNPDeviceID)
+        print(drive.Caption, drive.VolumeName, drive.DriveType)
 
         # print ('Device ID:', usb.DeviceID)
         # print ('Name:', usb.name)
@@ -203,6 +208,10 @@ def enc(driveLetter):
 
 
 
+
+
+
+
 if __name__ == "__main__":
     
     # T1 = Thread(target=devHandle, args=())
@@ -210,4 +219,49 @@ if __name__ == "__main__":
 
     # main()
 
-    enc("H")
+    #enc("H")
+
+    """  drives = updateDrive()
+    print(drives)
+
+    for drive in drives:
+
+        tmpFile = open(f'{os.getcwd()}/tmp.ps1','w')
+        tmpFile.write('$driveEject = New-Object -comObject Shell.Application\n')
+        tmpFile.write('$driveEject.Namespace(17).ParseName("'+drive+':").InvokeVerb("Eject")')
+        tmpFile.close()
+        
+        try:
+            process = subprocess.Popen(['powershell.exe', '-ExecutionPolicy','Unrestricted','./tmp.ps1'])
+            process.communicate()
+        except:
+            print("Couldn't disable")
+        time.sleep(2)
+    """
+    
+    """
+    while(len(updateDrive())>0):
+        drives = updateDrive()
+        print(drives)
+
+        #disk = "I"
+        for disk in drives:
+            tmpFile = open(f'{os.getcwd()}/tmp.ps1','w')
+            tmpFile.write('$driveEject = New-Object -comObject Shell.Application\n')
+            tmpFile.write('$driveEject.Namespace(17).ParseName("'+disk+':").InvokeVerb("Eject")')
+            tmpFile.close()
+            try:
+                print(f"Ejecting : {disk}")
+                process = subprocess.Popen(['powershell.exe', '-ExecutionPolicy','Unrestricted','./tmp.ps1'])
+                process.communicate()
+            except:
+                pass
+        time.sleep(2)
+    """
+    disk = "H"
+    tmpFile = open('tmp.ps1','w')
+    tmpFile.write('$driveEject = New-Object -comObject Shell.Application\n')
+    tmpFile.write('$driveEject.Namespace(17).ParseName("'+disk+':").InvokeVerb("Eject")')
+    tmpFile.close()
+    process = subprocess.Popen(['powershell.exe', '-ExecutionPolicy','Unrestricted','./tmp.ps1'])
+    process.communicate()

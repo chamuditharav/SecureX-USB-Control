@@ -18,6 +18,9 @@ from tkinter import *
 from tkinter import messagebox
 
 
+import win32api
+import win32con
+import win32file
 
 import psutil
 
@@ -114,36 +117,74 @@ def devconIntegrity(path):
 
 
 def getRemovableDeviceLetters():
-    disks = psutil.disk_partitions()
-    tempArray = []
-    for disc in disks:
-        if("fixed" not in disc.opts):
-            tempArray.append(disc.mountpoint[0])
-    return tempArray
+    tempArray = {}
+    for drive in win32com.client.GetObject ("winmgmts:").InstancesOf ("Win32_logicalDisk"):
+        if(drive.DriveType == 2):
+            cont = [drive.VolumeName,drive.DriveType]
+            tempArray[drive.Caption] = cont
+    print(tempArray)
+
 
 def seriousFailSafe():
-    pushLog(f"SERIOUS FAILSAFE INITIATED ..............................")
-    psFilePath = f'{os.getcwd()}/tmp.ps1'
-    while(len(getRemovableDeviceLetters())>0):
-        drives = getRemovableDeviceLetters()
-        pushLog(f"Detected drives -> {drives}")
+    pass
+    # pushLog(f"SERIOUS FAILSAFE INITIATED ..............................")
+    # while True:
+    #     for drive in win32com.client.GetObject ("winmgmts:").InstancesOf ("Win32_logicalDisk"):
+    #         if(drive.DriveType == 2):
+    #             print(drive.VolumeName)
+    #     break
+
+    #psFilePath = f'{os.getcwd()}/tmp.ps1'
+    # while(len(getRemovableDeviceLetters().keys())>0):
+    #     drives = getRemovableDeviceLetters()
+    #     pushLog(f"Detected drives -> {drives.keys()}")
 
         #disk = "I"
-        for disk in drives:
-            tmpFile = open(psFilePath,'w')
-            tmpFile.write('$driveEject = New-Object -comObject Shell.Application\n')
-            tmpFile.write('$driveEject.Namespace(17).ParseName("'+disk+':").InvokeVerb("Eject")')
-            tmpFile.close()
-            try:
-                pushLog(f"Ejecting : {disk}")
-                process = subprocess.Popen(['powershell.exe', '-ExecutionPolicy','Unrestricted','./tmp.ps1'])
-                process.communicate()
-            except:
-                pass
-        time.sleep(2)
-    os.remove(psFilePath)
-    pushLog(f"SERIOUS FAILSAFE ENDED ..............................")
+        # for disk in drives.keys():
+        #     if(drives[disk][0] != "None"):
+        #         cmd = '$driveEject = New-Object -comObject Shell.Application; $driveEject.Namespace(17).ParseName("'+disk+':").InvokeVerb("Eject")'
+        #         #tmpFile = open(psFilePath,'w')
+        #         #tmpFile.write('$driveEject = New-Object -comObject Shell.Application\n')
+        #         #tmpFile.write('$driveEject.Namespace(17).ParseName("'+disk+':").InvokeVerb("Eject")')
+        #         #tmpFile.close()
+        #         try:
+        #             pushLog(f"Ejecting : {disk}")
+        #             process = subprocess.Popen(['powershell.exe', '-ExecutionPolicy','Unrestricted', '-windowstyle', 'hidden' ,cmd], shell=False)
+        #             process.communicate()
+        #         except:
+        #             pass
+        #time.sleep(2)
+    #os.remove(psFilePath)
+    #pushLog(f"SERIOUS FAILSAFE ENDED ..............................")
 
+
+"""
+def seriousFailSafe():
+    pushLog(f"SERIOUS FAILSAFE INITIATED ..............................")
+    print(getRemovableDeviceLetters())
+    #psFilePath = f'{os.getcwd()}/tmp.ps1'
+    # while(len(getRemovableDeviceLetters().keys())>0):
+    #     drives = getRemovableDeviceLetters()
+    #     pushLog(f"Detected drives -> {drives.keys()}")
+
+        #disk = "I"
+        # for disk in drives.keys():
+        #     if(drives[disk][0] != "None"):
+        #         cmd = '$driveEject = New-Object -comObject Shell.Application; $driveEject.Namespace(17).ParseName("'+disk+':").InvokeVerb("Eject")'
+        #         #tmpFile = open(psFilePath,'w')
+        #         #tmpFile.write('$driveEject = New-Object -comObject Shell.Application\n')
+        #         #tmpFile.write('$driveEject.Namespace(17).ParseName("'+disk+':").InvokeVerb("Eject")')
+        #         #tmpFile.close()
+        #         try:
+        #             pushLog(f"Ejecting : {disk}")
+        #             process = subprocess.Popen(['powershell.exe', '-ExecutionPolicy','Unrestricted', '-windowstyle', 'hidden' ,cmd], shell=False)
+        #             process.communicate()
+        #         except:
+        #             pass
+        #time.sleep(2)
+    #os.remove(psFilePath)
+    pushLog(f"SERIOUS FAILSAFE ENDED ..............................")
+"""
 
 def failSafeRemove(devcon,device):
     pushLog(f"Fail safe device remove triggered for {device}")
@@ -160,8 +201,9 @@ def failSafeRemove(devcon,device):
                 msgBox_Thread = Thread(target=showAlertNative, args=('SecureX USB Agent Alert', 'You are not allowed to use the plugged USB device'), daemon=False)
                 msgBox_Thread.start()
         else:
-            seroidFailSafe_Thread = Thread(target=seriousFailSafe, args=())
-            seroidFailSafe_Thread.start()
+            pass
+            # seroidFailSafe_Thread = Thread(target=seriousFailSafe, args=())
+            # seroidFailSafe_Thread.start()
                 
     except Exception as e:
         pushLog(f"Fail safe remove -> {e}")
@@ -290,10 +332,14 @@ def usbWatchdog_service(devcon,limit,whitelisted_usb):
     pushLog("-"*100)
     pushLog("Agent start")
 
-    seroidFailSafe_Thread = Thread(target=seriousFailSafe, args=())
-    seroidFailSafe_Thread.start()
+
+    # get_usb_device(whitelisted_usb)
+    # disableUSB_daemon(devcon)
 
     while True:
+        # get_usb_device(whitelisted_usb)
+        # disableUSB_daemon(devcon)
+
         get_usb_device(whitelisted_usb)
 
         #devconIntegrity(devcon)

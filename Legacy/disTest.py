@@ -197,10 +197,22 @@ def getLetter():
 
 
 
+def updateDrive2():
+    disks = psutil.disk_partitions()
+    tempArray = []
+    for disk in disks:
+        if(("fixed" not in disk.opts) and (os.path.exists(f"{disk.mountpoint[0]}:/"))):
+            tempArray.append(disk.mountpoint[0])
+
+    return tempArray
+
+
+
 if __name__ == "__main__":
     #Logical()
-    USB()
+    #USB()
 
+    print(updateDrive2())
     
     # T1 = Thread(target=devHandle, args=())
     # T1.start()

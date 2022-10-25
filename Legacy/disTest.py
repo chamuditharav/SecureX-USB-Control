@@ -11,12 +11,13 @@ import win32com.client
 from threading import Thread
 
 
+import win32api
+import win32con
+import win32file
+
+
 import wmi
 
-def getLetter(deviceID):
-    #logical_disk = wmi.WMI().query("SELECT * FROM Win32_LogicalDisk WHERE DeviceID=USB\\VID_0718&PID_0638\\07A10603AD5E64C2")
-    logical_disk = wmi.WMI().query("SELECT * FROM Win32_LogicalDisk WHERE DriveType=2")
-    print('Drive letter: {}'.format(logical_disk.DeviceID))
 
 
 
@@ -109,30 +110,14 @@ else:
 
 
 def Logical():
-    #wmi = win32com.client.GetObject ("winmgmts:")
+    tempArray = {}
     for drive in win32com.client.GetObject ("winmgmts:").InstancesOf ("Win32_logicalDisk"):
-        # print usb.DeviceID
-        # pprint.pprint (dir(usb))
-        # pprint.pprint (vars(usb))
-        # print usb.__dict__
+        if(drive.DriveType == 2):
+            #print(drive.Caption, drive.VolumeName, drive.DriveType)
+            tempArray[drive.Caption] = [drive.VolumeName,drive.DriveType]
+    
+    print(tempArray)
 
-        print(drive.Caption, drive.VolumeName, drive.PNPDeviceID)
-
-        # print ('Device ID:', usb.DeviceID)
-        # print ('Name:', usb.name)
-        # print ('System Name:', usb.SystemName)
-        # print ('Caption:', usb.Caption)
-        # print ('ClassCode:', usb.ClassCode)
-        # print ('CreationClassName:', usb.CreationClassName)
-        # print ('CurrentConfigValue:', usb.CurrentConfigValue)
-        # print ('Description:', usb.Description)
-        # print ('PNPDeviceID:', usb.PNPDeviceID)
-        # print ('Status:', usb.Status)
-        # print(usb.CurrentConfigValue)
-        
-        # print ('\n')
-        pass
-    # Fetches the list of all usb devices:
 
 
 #Logical()
@@ -203,11 +188,86 @@ def enc(driveLetter):
 
 
 
+
+def getLetter():
+    #logical_disk = wmi.WMI().query("SELECT * FROM Win32_LogicalDisk WHERE DeviceID=USB\\VID_0718&PID_0638\\07A10603AD5E64C2")
+    logical_disk = wmi.WMI().query("SELECT * FROM Win32_LogicalDisk WHERE DriveType=2")
+    #print('Drive letter: {}'.format(logical_disk.DeviceID))
+    print(logical_disk)
+
+
+
+def updateDrive2():
+    disks = psutil.disk_partitions()
+    tempArray = []
+    for disk in disks:
+        if(("fixed" not in disk.opts) and (os.path.exists(f"{disk.mountpoint[0]}:/"))):
+            tempArray.append(disk.mountpoint[0])
+
+    return tempArray
+
+
+
 if __name__ == "__main__":
+    #Logical()
+    #USB()
+
+    print(updateDrive2())
     
     # T1 = Thread(target=devHandle, args=())
     # T1.start()
 
     # main()
 
-    enc("H")
+    #enc("H")
+
+    """  drives = updateDrive()
+    print(drives)
+
+    for drive in drives:
+
+        tmpFile = open(f'{os.getcwd()}/tmp.ps1','w')
+        tmpFile.write('$driveEject = New-Object -comObject Shell.Application\n')
+        tmpFile.write('$driveEject.Namespace(17).ParseName("'+drive+':").InvokeVerb("Eject")')
+        tmpFile.close()
+        
+        try:
+            process = subprocess.Popen(['powershell.exe', '-ExecutionPolicy','Unrestricted','./tmp.ps1'])
+            process.communicate()
+        except:
+            print("Couldn't disable")
+        time.sleep(2)
+    """
+    
+    """
+    while(len(updateDrive())>0):
+        drives = updateDrive()
+        print(drives)
+
+        #disk = "I"
+        for disk in drives:
+            #tmpFile = open(f'{os.getcwd()}/tmp.ps1','w')
+            #tmpFile.write('$driveEject = New-Object -comObject Shell.Application\n')
+            #tmpFile.write('$driveEject.Namespace(17).ParseName("'+disk+':").InvokeVerb("Eject")')
+            #tmpFile.close()
+            cmd = '$driveEject = New-Object -comObject Shell.Application; $driveEject.Namespace(17).ParseName("'+disk+':").InvokeVerb("Eject")'
+            try:
+                print(f"Ejecting : {disk}")
+                process = subprocess.Popen(['powershell.exe', '-ExecutionPolicy','Unrestricted', cmd])
+                process.communicate()
+            except:
+                pass
+        time.sleep(2)
+
+    """
+
+    """    disk = "H"
+    tmpFile = open('tmp.ps1','w')
+    tmpFile.write('$driveEject = New-Object -comObject Shell.Application\n')
+    tmpFile.write('$driveEject.Namespace(17).ParseName("'+disk+':").InvokeVerb("Eject")')
+    tmpFile.close()
+    process = subprocess.Popen(['powershell.exe', '-ExecutionPolicy','Unrestricted','./tmp.ps1'])
+    process.communicate()
+    """
+
+    #subprocess.run(["devcon", 'remove', "USB\VID_0718&PID_062*"])

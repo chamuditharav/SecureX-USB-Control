@@ -11,6 +11,7 @@ from hashlib import sha256
 
 import win32com.client
 import subprocess
+import signal
 from threading import Thread
 
 
@@ -134,7 +135,7 @@ def seriousFailSafe():
             cmd = '$driveEject = New-Object -comObject Shell.Application; $driveEject.Namespace(17).ParseName("'+drive+':").InvokeVerb("Eject")'
             try:
                 pushLog(f"Ejecting : {drive}")
-                process = subprocess.Popen(['powershell.exe', '-ExecutionPolicy','Unrestricted',"-windowstyle","hidden", cmd])
+                process = subprocess.Popen(['powershell.exe', '-ExecutionPolicy','Unrestricted',"-windowstyle","hidden", cmd],shell=False)
                 process.communicate()
             except:
                 pass
@@ -167,24 +168,29 @@ def failSafeRemove(devcon,device):
     except Exception as e:
         pushLog(f"Fail safe remove -> {e}")
 
+"""
+def preCheckEject(devcon):
+    pushLog(f"Pre chech eject initiated")
+    while(len(usb_devices)>0):
+        for device in usb_devices:
+            #print(device)
+            if(usb_device_status[device]=="OK"):
+                try:
+                    pushLog("Checking devcon integrity")
+                    devconIntegrity(devcon)
 
-def ejectDisabled(devcon,device):
-    pushLog(f"Ejecting the disabled device : {device}")
-    try:
-        pushLog("Checking devcon integrity")
-        devconIntegrity(devcon)
+                    ejectDisableProc = subprocess.Popen([devcon, 'remove', usb_devices[device]],  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    stdout, stderr = ejectDisableProc.communicate()
+                    out = stdout.decode().strip()
+                    pushLog(f"devcon output [PRE CHECK EJECT] : {device} : {out}")
 
-        ejectDisableProc = subprocess.Popen([devcon, 'remove', usb_devices[device]],  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        stdout, stderr = ejectDisableProc.communicate()
-        out = stdout.decode().strip()
-        pushLog(f"devcon output [Eject disable] : {device} : {out}")
-
-        if(("1 device(s) were removed" in out) or ("1 device(s) disabled" in out)):
-            pushLog(f"{device} Ejected !!!!!!!!!!!!1")
-                
-    except Exception as e:
-        pushLog(f"Eject disable faild -> {e}")
-
+                    if(("1 device(s) were removed" in out) or ("1 device(s) disabled" in out)):
+                        pushLog(f"{device} Ejected !")
+                            
+                except Exception as e:
+                    pushLog(f"Eject disable faild -> {e}")
+    pushLog(f"Pre chech eject ended")
+"""
 
 
 def disableUSB(devcon,device):
@@ -209,7 +215,6 @@ def disableUSB(devcon,device):
                 msgBox_Thread = Thread(target=showAlertNative, args=('SecureX USB Agent Alert', 'You are not allowed to use the plugged USB device'), daemon=False)
                 msgBox_Thread.start()
                 #msgBox_Thread.join()
-                #ejectDisabled(devcon,device)
             elif("The 1 device(s) are ready to be disabled" in out):
                 pushLog(f"Fail Safe Remove triggering ...........")
                 time.sleep(2)
@@ -218,7 +223,31 @@ def disableUSB(devcon,device):
 
         elif(usb_device_status[device]=="Error"):
             pass
-            #ejectDisabled(devcon,device)
+
+        else:
+            pprint("Already disabled or Device error!")
+            pushLog(f"Already disabled or Device error : {device}")
+    except Exception as e:
+        pushLog(f"Disable USB crashed -> {e}")
+
+
+def removeUSBNoAlert(devcon,device):
+    try:
+        if(usb_device_status[device] == "OK"):
+            pprint(usb_devices[device])
+            pushLog(f"Inside device remove thread : {device}")
+            pushLog("Checking devcon integrity")
+            devconIntegrity(devcon)
+            proc = subprocess.Popen([devcon, 'remove', usb_devices[device]],  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            
+            stdout, stderr = proc.communicate()
+            out = stdout.decode().strip()
+
+            pushLog(f"devcon output : {device} : {out}")
+
+        elif(usb_device_status[device]=="Error"):
+            pass
+
         else:
             pprint("Already disabled or Device error!")
             pushLog(f"Already disabled or Device error : {device}")
@@ -248,7 +277,7 @@ def disableUSB_daemon(devcon):
             elif(usb_device_status[device]=="Error"):
                 #print("THIS")
                 pass
-                #ejectDisabled(devcon,device)
+
         #pushLog(f"Device(s) disabled .......")
  
 
@@ -281,6 +310,21 @@ def get_usb_device(whitelisted_usb):
     return 0
     
 
+def precheck(devcon):
+    pprint(len(usb_devices))
+    if(len(usb_devices)>0):
+        #pushLog(f"Enabled device(s) detected .......")
+        for device in usb_devices:
+            if(usb_device_status[device]=="OK"):
+                try:
+                    pushLog(f"Precheck disable : {device}")
+
+                    removeUSBNoAlert(devcon,device)
+
+                except Exception as e:
+                    pushLog(f"Precheck disable error -> {e}")
+            elif(usb_device_status[device]=="Error"):
+                pass
        
 
 def usbWatchdog_service(devcon,limit,whitelisted_usb):
@@ -291,14 +335,25 @@ def usbWatchdog_service(devcon,limit,whitelisted_usb):
     pushLog("-"*100)
     pushLog("Agent start")
 
+
+    # get_usb_device(whitelisted_usb)
+    # #preCheckEject(devcon)
+
+    # disable_Daemon = Thread(target=disableUSB_daemon, args=(devcon,))
+    # disable_Daemon.start()
+    # disable_Daemon.join()
+
+    get_usb_device(whitelisted_usb)
+    precheck(devcon)
+
     pushLog(f"Removing all ejectable devices")
     startupEject_Thread = Thread(target=seriousFailSafe, args=())
     startupEject_Thread.start()
     startupEject_Thread.join()
     pushLog(f"All ejectable devices are removed")
 
-    # get_usb_device(whitelisted_usb)
-    # disableUSB_daemon(devcon)
+
+
 
     while True:
         # get_usb_device(whitelisted_usb)
@@ -332,7 +387,7 @@ def usbWatchdog_service(devcon,limit,whitelisted_usb):
                     
                     elif(usb_device_status[dev] == "Error"):
                         pushLog(f"Connected a device that already disabled {dev}")
-                        #ejectDisabled(devcon,dev)
+
                         msgBox_Thread = Thread(target=showAlertNative, args=('SecureX USB Agent Alert', 'You are not allowed to use the plugged USB device'), daemon=False)
                         msgBox_Thread.start()
 
@@ -347,11 +402,11 @@ def usbWatchdog_service(devcon,limit,whitelisted_usb):
         #pprint(usb_devices)
         #time.sleep(1)
 
-        disable_Daemon = Thread(target=disableUSB_daemon, args=(devcon,))
-        disable_Daemon.start()
-        disable_Daemon.join()
+        # disable_Daemon = Thread(target=disableUSB_daemon, args=(devcon,))
+        # disable_Daemon.start()
+        # disable_Daemon.join()
 
-        #disableUSB_daemon(devcon)
+        disableUSB_daemon(devcon)
         
         time.sleep(limit)
     

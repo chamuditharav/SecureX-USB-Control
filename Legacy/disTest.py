@@ -19,6 +19,8 @@ import win32file
 import wmi
 
 
+from numba import njit, jit
+
 
 
 
@@ -194,6 +196,7 @@ def getLetter():
     logical_disk = wmi.WMI().query("SELECT * FROM Win32_LogicalDisk WHERE DriveType=2")
     #print('Drive letter: {}'.format(logical_disk.DeviceID))
     print(logical_disk)
+
 
 
 

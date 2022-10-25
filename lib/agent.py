@@ -18,9 +18,6 @@ from tkinter import *
 from tkinter import messagebox
 
 
-import win32api
-import win32con
-import win32file
 
 import psutil
 
@@ -137,7 +134,7 @@ def seriousFailSafe():
             cmd = '$driveEject = New-Object -comObject Shell.Application; $driveEject.Namespace(17).ParseName("'+drive+':").InvokeVerb("Eject")'
             try:
                 pushLog(f"Ejecting : {drive}")
-                process = subprocess.Popen(['powershell.exe', '-ExecutionPolicy','Unrestricted',"-windowstyle","minimized", cmd])
+                process = subprocess.Popen(['powershell.exe', '-ExecutionPolicy','Unrestricted',"-windowstyle","hidden", cmd])
                 process.communicate()
             except:
                 pass
@@ -235,11 +232,11 @@ def disableUSB(devcon,device):
 def disableUSB_daemon(devcon):
     pprint(len(usb_devices))
     if(len(usb_devices)>0):
-        #pushLog(f"Starting the device disable check .......")
+        #pushLog(f"Enabled device(s) detected .......")
         for device in usb_devices:
             if(usb_device_status[device]=="OK"):
                 try:
-                    pushLog(f"Forced disable check : {device}")
+                    pushLog(f"Forced disable check [DAEMON] : {device}")
 
                     disableUSB(devcon,device)
                     
@@ -247,12 +244,12 @@ def disableUSB_daemon(devcon):
                     # disable_USB_Device_Daemon_Thread.start()
                     # disable_USB_Device_Daemon_Thread.join()
                 except Exception as e:
-                    pushLog(f"USB disable daemon crashed -> {e}")
+                    pushLog(f"USB disable daemon crashed [DAEMON] -> {e}")
             elif(usb_device_status[device]=="Error"):
                 #print("THIS")
                 pass
                 #ejectDisabled(devcon,device)
-            #pushLog(f"Device disable check ended .......")
+        #pushLog(f"Device(s) disabled .......")
  
 
 

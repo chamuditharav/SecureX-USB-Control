@@ -6,7 +6,10 @@ from hashlib import sha256
 
 
 def devconIntegrity():
-    if(not (os.path.exists("lib/devcon.exe"))):
+    if(not (os.path.exists("lib/"))):
+        os.mkdir("lib")
+
+    elif(not (os.path.exists("lib/devcon.exe"))):
         devconMake = open("lib/devcon.exe",'wb')
         devconMake.write(bytes.fromhex(genDevcon.devcon_bkp))
         devconMake.close()
@@ -25,13 +28,16 @@ def devconIntegrity():
 
 if __name__ == "__main__":
 
-    agent.pushLog(f"\nNew agent instance --> {os.getpid()}")
 
+    for i in range(1):
+        try:
+            whitelisted_usb = ["USB Root Hub (USB 3.0)", "USB Composite Device", "USB xHCI Compliant Host Controller","Generic USB Hub"]
+            agent.pushLog(f"\nNew agent instance --> {os.getpid()}")
 
-    try:
-        devconIntegrity()
-        devcon = f"{os.getcwd()}\lib\devcon"
-        agent.usbWatchdog_service(devcon,0.5)
-    except:
-        agent.pushLog("Program ended or crashed !")
-
+            devconIntegrity()
+            devcon = f"{os.getcwd()}\lib\devcon"
+            agent.usbWatchdog_service(devcon,0.1,whitelisted_usb)
+        except:
+            agent.pushLog("Program ended or crashed !")
+    else:
+        agent.pushLog("Agent Crashhed !!!!!!!!!!!!!!!!!")

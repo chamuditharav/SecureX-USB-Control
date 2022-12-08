@@ -14,8 +14,5 @@
 
 
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="/Assets/SecureX logo B.png">
-  <source media="(prefers-color-scheme: light)" srcset="/Assets/SecureX logo W.png">
-  <img alt="SecureX Logo" src="/Assets/SecureX logo W.png">
-</picture>
+![SecureX Logo](./Assets/SecureX%20logo%20B.png#gh-dark-mode-only)
+![SecureX Logo](./Assets/SecureX%20logo%20W.png#gh-light-mode-only)

@@ -1,0 +1,18 @@
+C:\Users\Chamuditha\source\repos\SecureX\bin\Debug\SecureX USB Agent Service.exe.config
+C:\Users\Chamuditha\source\repos\SecureX\bin\Debug\SecureX USB Agent Service.exe
+C:\Users\Chamuditha\source\repos\SecureX\bin\Debug\SecureX USB Agent Service.pdb
+C:\Users\Chamuditha\source\repos\SecureX\obj\Debug\SecureX.csproj.AssemblyReference.cache
+C:\Users\Chamuditha\source\repos\SecureX\obj\Debug\SecureX.ProjectInstaller.resources
+C:\Users\Chamuditha\source\repos\SecureX\obj\Debug\SecureX.csproj.GenerateResource.cache
+C:\Users\Chamuditha\source\repos\SecureX\obj\Debug\SecureX.csproj.CoreCompileInputs.cache
+C:\Users\Chamuditha\source\repos\SecureX\obj\Debug\SecureX USB Agent Service.exe
+C:\Users\Chamuditha\source\repos\SecureX\obj\Debug\SecureX USB Agent Service.pdb
+D:\Projects\SecureX-USB-Control\Agent Service\bin\Debug\SecureX USB Agent Service.exe.config
+D:\Projects\SecureX-USB-Control\Agent Service\bin\Debug\SecureX USB Agent Service.exe
+D:\Projects\SecureX-USB-Control\Agent Service\bin\Debug\SecureX USB Agent Service.pdb
+D:\Projects\SecureX-USB-Control\Agent Service\obj\Debug\SecureX.csproj.AssemblyReference.cache
+D:\Projects\SecureX-USB-Control\Agent Service\obj\Debug\SecureX.ProjectInstaller.resources
+D:\Projects\SecureX-USB-Control\Agent Service\obj\Debug\SecureX.csproj.GenerateResource.cache
+D:\Projects\SecureX-USB-Control\Agent Service\obj\Debug\SecureX.csproj.CoreCompileInputs.cache
+D:\Projects\SecureX-USB-Control\Agent Service\obj\Debug\SecureX USB Agent Service.exe
+D:\Projects\SecureX-USB-Control\Agent Service\obj\Debug\SecureX USB Agent Service.pdb

@@ -15,4 +15,8 @@
 
 
 
-![This is an image](/Assets/SecureX%20logo.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="/Assets/SecureX logo B.png">
+  <source media="(prefers-color-scheme: light)" srcset="/Assets/SecureX logo W.png">
+  <img alt="SecureX Logo" src="/Assets/SecureX logo W.png">
+</picture>

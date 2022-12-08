@@ -14,9 +14,5 @@
 * IT20095994 - Samadhini A.H.M.W
 
 
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="/Assets/SecureX logo W.png">
-  <source media="(prefers-color-scheme: light)" srcset="/Assets/SecureX logo B.png">
-  <img alt="SecureX Logo" src="/Assets/SecureX logo B.png">
-</picture>
+![SecureX logo](./Assets/SecureX%20logo%20B.png#gh-dark-mode-only)
+![SecureX logo](./Assets/SecureX%20logo%20W.png#gh-light-mode-only)

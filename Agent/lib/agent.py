@@ -38,18 +38,28 @@ thread_status = {}
 
 
 def pushLog(logInfo):
-    if(not os.path.isdir('logs')):
-        os.mkdir('logs')
-        logfile = open('logs/logs.log','w+')
+    if(not os.path.isdir(f'{os.getcwd()}/logs')):
+        os.mkdir(f'{os.getcwd()}/logs')
+        logfile = open(f'{os.getcwd()}/logs/logs.log','w+')
         logfile.close()
         pushLog(logInfo)
     else:
-        logfile = open('logs/logs.log','a')
+        logfile = open(f'{os.getcwd()}/logs/logs.log','a')
         timeNow = datetime.now()
         timeFrame = timeNow.strftime("%d/%m/%Y %H:%M:%S")
         logLine = f"{timeFrame}\t {logInfo}\n"
         logfile.write(logLine)
         logfile.close()
+
+
+
+def alertCom():
+    try:
+        with open(f'{os.getcwd()}/intercept.sx','w+') as alertCom:
+            alertCom.write(f"{bytes('SH_MSGBX', 'ascii').hex()}")
+            alertCom.close()
+    except:
+        pass
 
 
 def showAlertTk(title,text):
@@ -62,10 +72,10 @@ def showAlertTk(title,text):
 
 
 def showAlertNative(title,text):
-    #pushLog(f"Alert : {title}")
-    MessageBox = windll.user32.MessageBoxW
+    alertCom()
+    #MessageBox = windll.user32.MessageBoxW
     #MessageBox(None, text, title, 16)
-    MessageBox(None, text, title, 0x1000|16) #0x1010
+    #MessageBox(None, text, title, 0x1000|16) #0x1010
 
 
 def pprint(context):
@@ -326,14 +336,14 @@ def precheck(devcon):
                 pass
        
 
-def usbWatchdog_service(devcon,limit,whitelisted_usb):
+def usbWatchdog_service(devcon,limit,whitelisted_usb,whitelisted_users,loggedUser):
     usb_device_list_old = []
     new_devices = []
 
 
     pushLog("-"*100)
     pushLog("Agent start")
-    pushLog(f"User : {os.getlogin()}")
+    #pushLog(f"User : {os.getlogin()}")
 
 
     # get_usb_device(whitelisted_usb)

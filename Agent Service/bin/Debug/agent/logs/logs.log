@@ -1,0 +1,11 @@
+09/12/2022 13:39:33	 
+New agent instance --> 14220
+09/12/2022 13:39:33	 ----------------------------------------------------------------------------------------------------
+09/12/2022 13:39:33	 Agent start
+09/12/2022 13:39:33	 User : SYSTEM
+09/12/2022 13:39:33	 Removing all ejectable devices
+09/12/2022 13:39:33	 All ejectable devices are removed
+09/12/2022 13:39:42	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0628
+09/12/2022 13:39:42	 Connected a device that already disabled USB Mass Storage Device:1
+09/12/2022 13:47:29	 New device connected : USB Mass Storage Device:1:USB\VID_0718&PID_0628
+09/12/2022 13:47:29	 Connected a device that already disabled USB Mass Storage Device:1

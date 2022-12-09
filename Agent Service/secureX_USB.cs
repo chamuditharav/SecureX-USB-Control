@@ -53,7 +53,7 @@ namespace SecureX
                 try
                 {
                     WriteToFile("Service starting..... " + DateTime.Now + " :: " + "USER : " + username + " :: AGENT STATUS : " + agentRunning);
-                    Process.Start(AppDomain.CurrentDomain.BaseDirectory + "agent\\SecureX USB agent.exe",username);
+                    Process.Start(AppDomain.CurrentDomain.BaseDirectory + "agent\\SecureX USB agent.exe");
                     //Process.Start(AppDomain.CurrentDomain.BaseDirectory + "notification\\Notification test.exe");
 
                 }

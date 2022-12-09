@@ -1,0 +1,13 @@
+﻿Installing assembly 'D:\Projects\SecureX-USB-Control\Agent Service\bin\Debug\SecureX USB Agent Service.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\SecureX-USB-Control\Agent Service\bin\Debug\SecureX USB Agent Service.InstallLog
+   assemblypath = D:\Projects\SecureX-USB-Control\Agent Service\bin\Debug\SecureX USB Agent Service.exe
+Installing service secureX USB Agent Service...
+Service secureX USB Agent Service has been successfully installed.
+Creating EventLog source secureX USB Agent Service in log Application...
+Committing assembly 'D:\Projects\SecureX-USB-Control\Agent Service\bin\Debug\SecureX USB Agent Service.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = D:\Projects\SecureX-USB-Control\Agent Service\bin\Debug\SecureX USB Agent Service.InstallLog
+   assemblypath = D:\Projects\SecureX-USB-Control\Agent Service\bin\Debug\SecureX USB Agent Service.exe
